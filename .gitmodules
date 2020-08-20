@@ -1,3 +1,6 @@
 [submodule "cpp/ut/lib/googletest"]
 	path = cpp/ut/lib/googletest
 	url = https://github.com/google/googletest
+[submodule "cpp/leetcode/lib/googletest"]
+	path = cpp/leetcode/lib/googletest
+	url = https://github.com/google/googletest/
