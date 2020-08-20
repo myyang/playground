@@ -43,3 +43,25 @@ TEST(binary_search, search_range_tests)
     EXPECT_EQ (search_range(duplicates, 7), found_7);
     EXPECT_EQ (search_range(duplicates, 8), not_found);
 }
+
+TEST(binary_search, search_min_in_rotated_array_tests)
+{
+    std::vector<int>
+        rotate0 = {0,1,3,5},
+        rotate1 = {5,0,1,3},
+        rotate2 = {3,5,0,1},
+        rotate3 = {1,3,5,0},
+        drotate0 = {0, 0, 0, 0, 1, 1},
+        drotate1 = {1, 0, 0, 0, 0, 1},
+        drotate2 = {1, 0, 0, 0, 0},
+        drotate3 = {0, 0, 0, 0};
+
+    EXPECT_EQ (search_min_in_rotated_array(rotate0), 0);
+    EXPECT_EQ (search_min_in_rotated_array(rotate1), 1);
+    EXPECT_EQ (search_min_in_rotated_array(rotate2), 2);
+    EXPECT_EQ (search_min_in_rotated_array(rotate3), 3);
+    EXPECT_EQ (search_min_in_rotated_array(drotate0), 0);
+    EXPECT_EQ (search_min_in_rotated_array(drotate1), 1);
+    EXPECT_EQ (search_min_in_rotated_array(drotate2), 1);
+    EXPECT_EQ (search_min_in_rotated_array(drotate3), 0);
+}
