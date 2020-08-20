@@ -33,3 +33,13 @@ TEST(binary_search, search_insert_position_tests)
     EXPECT_EQ (search_insert_position(duplicates, 7), 4);
     EXPECT_EQ (search_insert_position(duplicates, 8), 4);
 }
+
+TEST(binary_search, search_range_tests)
+{
+    std::vector<int> duplicates = {5,5,7,7};
+    std::vector<int> not_found = {-1, -1}, found_5 = {0, 1}, found_7 = {2, 3};
+    EXPECT_EQ (search_range(duplicates, 0), not_found);
+    EXPECT_EQ (search_range(duplicates, 5), found_5);
+    EXPECT_EQ (search_range(duplicates, 7), found_7);
+    EXPECT_EQ (search_range(duplicates, 8), not_found);
+}
