@@ -65,3 +65,26 @@ TEST(binary_search, search_min_in_rotated_array_tests)
     EXPECT_EQ (search_min_in_rotated_array(drotate2), 1);
     EXPECT_EQ (search_min_in_rotated_array(drotate3), 0);
 }
+
+TEST(binary_search, koko_eating_bananas_tests)
+{
+    std::vector<int>
+        p0 = {3,6,7,11},
+        p1 = {30,11,23,4,20};
+
+    EXPECT_EQ (koko_eating_bananas(p0, 8), 4);
+    EXPECT_EQ (koko_eating_bananas(p1, 5), 30);
+    EXPECT_EQ (koko_eating_bananas(p1, 6), 23);
+}
+
+TEST(binary_search, capacity_to_ship_pkgs_tests)
+{
+    std::vector<int>
+        p0 = {1,2,3,4,5,6,7,8,9,10},
+        p1 = {3,2,2,4,1,4},
+        p2 = {1,2,3,1,1};
+
+    EXPECT_EQ (capacity_to_ship_pkgs(p0, 5), 15);
+    EXPECT_EQ (capacity_to_ship_pkgs(p1, 3), 6);
+    EXPECT_EQ (capacity_to_ship_pkgs(p2, 4), 3);
+}
