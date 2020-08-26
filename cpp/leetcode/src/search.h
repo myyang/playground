@@ -25,4 +25,7 @@ std::vector<std::vector<int>> permutations_de_dup(std::vector<int>& nums);
 // #784
 std::vector<std::string> letter_case_permutation(std::string raw);
 
+// #22
+std::vector<std::string> generate_parenthes(int n);
+
 #endif //LEETCODE_SEARCH_H

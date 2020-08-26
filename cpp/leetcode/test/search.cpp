@@ -93,3 +93,12 @@ TEST(search, letter_case_permutation_tests)
     std::vector<std::string> exp2 = {"12345"};
     EXPECT_EQ (letter_case_permutation("12345"), exp2);
 }
+
+TEST(search, generate_parenthes_tests)
+{
+    std::vector<std::string> exp1 = {"()"};
+    EXPECT_EQ (generate_parenthes(1), exp1);
+
+    std::vector<std::string> exp3 = {"((()))", "(()())", "(())()", "()(())", "()()()" };
+    EXPECT_EQ (generate_parenthes(3), exp3);
+}

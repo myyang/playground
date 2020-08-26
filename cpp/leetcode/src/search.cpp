@@ -256,3 +256,41 @@ std::vector<std::string> letter_case_permutation(std::string raw)
 
     return res;
 }
+
+// #22
+std::vector<std::string> generate_parenthes(int n)
+{
+    std::vector<std::string> res;
+    if (n == 0) return res;
+
+    std::string cur;
+
+    std::function<void(int, int)> dfs = [&](int l, int r)
+    {
+        if (l == 0 && r == 0)
+        {
+            res.push_back(cur);
+            return;
+        }
+
+        if (l > r) return;
+
+        if (l > 0)
+        {
+            cur += "(";
+            dfs(l-1, r);
+            cur.pop_back();
+        }
+
+        if (r > 0)
+        {
+            cur += ")";
+            dfs(l, r-1);
+            cur.pop_back();
+        }
+    };
+
+    dfs(n, n);
+
+    return res;
+}
