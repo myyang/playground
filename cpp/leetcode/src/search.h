@@ -12,4 +12,7 @@ std::vector<std::vector<int>> combination_sum(std::vector<int>& nums, int target
 // #40
 std::vector<std::vector<int>> combination_sum_de_dup(std::vector<int>& nums, int target);
 
+// #77
+std::vector<std::vector<int>> combinations(int n, int k);
+
 #endif //LEETCODE_SEARCH_H

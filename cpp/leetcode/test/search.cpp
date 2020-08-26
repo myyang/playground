@@ -51,3 +51,21 @@ TEST(search, combination_sum_de_dup_tests)
     std::vector<std::vector<int>> exp21 = {{2, 3, 4, 5, 7}};
     EXPECT_EQ (combination_sum_de_dup(nums, 21), exp21);
 }
+
+TEST(search, combinations_test)
+{
+    std::vector<std::vector<int>> expn4k0 = { };
+    EXPECT_EQ (combinations(4, 0), expn4k0);
+
+    std::vector<std::vector<int>> expn4k2 = { {1,2}, {1,3}, {1,4}, {2,3}, {2,4}, {3,4} };
+    EXPECT_EQ (combinations(4, 2), expn4k2);
+
+    std::vector<std::vector<int>> expn4k1 = { {1}, {2}, {3}, {4} };
+    EXPECT_EQ (combinations(4, 1), expn4k1);
+
+    std::vector<std::vector<int>> expn4k4 = { {1, 2, 3, 4} };
+    EXPECT_EQ (combinations(4, 4), expn4k4);
+
+    std::vector<std::vector<int>> expn3k4 = { {1, 2, 3} };
+    EXPECT_EQ (combinations(3, 4), expn3k4);
+}
