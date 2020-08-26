@@ -4,6 +4,7 @@
 #include <iostream>
 #include <set>
 #include <functional>
+#include <cctype>
 
 // #17
 void letter_combination_dfs(
@@ -226,5 +227,32 @@ std::vector<std::vector<int>> permutations_de_dup(std::vector<int>& nums)
     };
 
     dfs();
+    return res;
+}
+
+// #784
+std::vector<std::string> letter_case_permutation(std::string raw)
+{
+    std::vector<std::string> res;
+    if (raw.size() == 0) return res;
+
+    std::function<void(int)> dfs = [&](int d)
+    {
+        if (d == raw.size())
+        {
+            res.push_back(raw);
+            return;
+        }
+
+        dfs(d+1);
+        if ( !std::isalpha(raw[d]) ) return;
+
+        raw[d] ^= (1 << 5);
+        dfs(d+1);
+        raw[d] ^= (1 << 5);
+    };
+
+    dfs(0);
+
     return res;
 }

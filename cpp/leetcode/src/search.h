@@ -2,6 +2,7 @@
 #define LEETCODE_SEARCH_H
 
 #include <vector>
+#include <string>
 
 // #17
 std::vector<std::string> letter_combination(std::string digits);
@@ -20,5 +21,8 @@ std::vector<std::vector<int>> permutations(std::vector<int>& nums);
 
 // #47
 std::vector<std::vector<int>> permutations_de_dup(std::vector<int>& nums);
+
+// #784
+std::vector<std::string> letter_case_permutation(std::string raw);
 
 #endif //LEETCODE_SEARCH_H

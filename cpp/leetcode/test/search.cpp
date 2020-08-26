@@ -84,3 +84,12 @@ TEST(search, permutations_de_dup_tests)
     };
     EXPECT_EQ (permutations_de_dup(nums4), exp4);
 }
+
+TEST(search, letter_case_permutation_tests)
+{
+    std::vector<std::string> exp1 = {"a1b2", "a1B2", "A1b2", "A1B2"};
+    EXPECT_EQ (letter_case_permutation("a1b2"), exp1);
+
+    std::vector<std::string> exp2 = {"12345"};
+    EXPECT_EQ (letter_case_permutation("12345"), exp2);
+}
