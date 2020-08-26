@@ -1,6 +1,9 @@
 #include <vector>
 #include <iostream>
 #include <algorithm> // std::max, std::min
+#include <string>
+#include <locale> // std::isalpha
+#include <utility> // std::swap
 
 // #11
 int contain_most_water(std::vector<int>& nums)
@@ -49,4 +52,49 @@ int trap_most_water(std::vector<int>& nums)
     }
 
     return trapped;
+}
+
+// #917
+std::string reverse_only_letters(std::string raw)
+{
+    int n = raw.size();
+    if (n == 0) return "";
+
+    int l = 0, r = n-1;
+    while (l < r)
+    {
+
+        if (std::isalpha(raw[l]) && std::isalpha(raw[r]))
+        {
+            std::swap(raw[l++], raw[r--]);
+        }
+        else
+        {
+            if (!std::isalpha(raw[l])) ++l;
+            if (!std::isalpha(raw[r])) --r;
+        }
+    }
+
+    return raw;
+}
+
+// #925
+bool long_pressed_name(std::string name, std::string typed)
+{
+    int i = 0, j = 0;
+    while (i < name.size() && j < typed.size())
+    {
+        if (name[i] == typed[j])
+        {
+            ++i;
+            ++j;
+        }
+        else if (j > 0 && typed[j-1] == typed[j])
+            ++j;
+        else
+            return false;
+    }
+
+    while (j < typed.size() && typed[j] == typed[j-1]) ++j;
+    return i == name.size() && j == typed.size();
 }
