@@ -51,3 +51,12 @@ TEST(search, combination_sum_de_dup_tests)
     std::vector<std::vector<int>> exp21 = {{2, 3, 4, 5, 7}};
     EXPECT_EQ (combination_sum_de_dup(nums, 21), exp21);
 }
+
+TEST(search, combination_sum_3_tests)
+{
+    std::vector<std::vector<int>> exp37 = {{1,2,4}};
+    EXPECT_EQ (combination_sum_3(3, 7), exp37);
+
+    std::vector<std::vector<int>> exp39 = { {1,2,6}, {1,3,5}, {2,3,4} };
+    EXPECT_EQ (combination_sum_3(3, 9), exp39);
+}

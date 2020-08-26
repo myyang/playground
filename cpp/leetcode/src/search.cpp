@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iostream>
 #include <set>
+#include <functional>
 
 // #17
 void letter_combination_dfs(
@@ -125,5 +126,32 @@ std::vector<std::vector<int>> combination_sum_de_dup(std::vector<int>& nums, int
 
     for (auto r: res2) res.push_back(r);
 
+    return res;
+}
+
+// #216
+std::vector<std::vector<int>> combination_sum_3(int k, int n)
+{
+    std::vector<std::vector<int>> res;
+    if (k == 0 || n == 0) return res;
+
+    std::vector<int> cur;
+    std::function<void(int, int)> dfs = [&](int d, int target)
+    {
+        if (target <= 0)
+        {
+            if (target == 0 && cur.size() == k) res.push_back(cur);
+            return;
+        }
+
+        for (int i = d; i < 10; ++i)
+        {
+            cur.push_back(i);
+            dfs(i+1, target - i);
+            cur.pop_back();
+        }
+    };
+
+    dfs(1, n);
     return res;
 }
