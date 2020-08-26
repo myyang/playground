@@ -69,3 +69,9 @@ TEST(search, combinations_test)
     std::vector<std::vector<int>> expn3k4 = { {1, 2, 3} };
     EXPECT_EQ (combinations(3, 4), expn3k4);
 }
+
+TEST(search, combinations_nums_test)
+{
+    std::vector<std::vector<int>> nums3 = { {}, {1,2,3}, {1,2}, {1,3}, {1}, {2,3}, {2}, {3}};
+    EXPECT_EQ (combinations_nums({1, 2, 3}), nums3);
+}

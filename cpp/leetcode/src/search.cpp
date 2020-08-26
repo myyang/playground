@@ -164,3 +164,29 @@ std::vector<std::vector<int>> combinations(int n, int k)
     dfs(0);
     return res;
 }
+
+// #78
+std::vector<std::vector<int>> combinations_nums(std::vector<int> nums)
+{
+    std::vector<std::vector<int>> res = {{}};
+    if (nums.size() == 0) return res;
+
+    std::vector<int> cur;
+    std::function<void(int)> dfs = [&](int d)
+    {
+        if (d >= nums.size()) return;
+
+        for (int i = d; i < nums.size(); ++i)
+        {
+            cur.push_back(nums[i]);
+
+            dfs(i+1);
+            res.push_back(cur);
+
+            cur.pop_back();
+        }
+    };
+
+    dfs(0);
+    return res;
+}
