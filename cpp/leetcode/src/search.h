@@ -15,4 +15,10 @@ std::vector<std::vector<int>> combination_sum_de_dup(std::vector<int>& nums, int
 // #216
 std::vector<std::vector<int>> combination_sum_3(int k, int n);
 
+// #46
+std::vector<std::vector<int>> permutations(std::vector<int>& nums);
+
+// #47
+std::vector<std::vector<int>> permutations_de_dup(std::vector<int>& nums);
+
 #endif //LEETCODE_SEARCH_H

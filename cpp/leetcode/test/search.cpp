@@ -60,3 +60,27 @@ TEST(search, combination_sum_3_tests)
     std::vector<std::vector<int>> exp39 = { {1,2,6}, {1,3,5}, {2,3,4} };
     EXPECT_EQ (combination_sum_3(3, 9), exp39);
 }
+
+TEST(search, permutations_tests)
+{
+    std::vector<int> nums3 = {1,2,3};
+    std::vector<std::vector<int>> exp3 = {
+        {1,2,3}, {1,3,2}, {2,1,3}, {2,3,1}, {3,1,2}, {3,2,1}
+    };
+    EXPECT_EQ (permutations(nums3), exp3);
+}
+
+TEST(search, permutations_de_dup_tests)
+{
+    std::vector<int> nums3 = {1,1,2};
+    std::vector<std::vector<int>> exp3 = {
+        {1,1,2}, {1,2,1}, {2,1,1}
+    };
+    EXPECT_EQ (permutations_de_dup(nums3), exp3);
+
+    std::vector<int> nums4 = {1,1,1,2};
+    std::vector<std::vector<int>> exp4 = {
+        {1,1,1,2}, {1,1,2,1}, {1,2,1,1}, {2,1,1,1}
+    };
+    EXPECT_EQ (permutations_de_dup(nums4), exp4);
+}

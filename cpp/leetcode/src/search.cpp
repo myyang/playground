@@ -155,3 +155,76 @@ std::vector<std::vector<int>> combination_sum_3(int k, int n)
     dfs(1, n);
     return res;
 }
+
+// #46
+std::vector<std::vector<int>> permutations(std::vector<int>& nums)
+{
+    std::vector<std::vector<int>> res;
+    int n = nums.size();
+    if (n == 0) return res;
+
+    std::vector<bool> used(n, false);
+    std::vector<int> cur;
+
+    std::function<void()> dfs = [&]()
+    {
+        if (cur.size() == n)
+        {
+            res.push_back(cur);
+            return;
+        }
+
+        for (int i = 0; i < n; ++i)
+        {
+            if (used[i]) continue;
+
+            cur.push_back(nums[i]);
+            used[i] = true;
+
+            dfs();
+
+            cur.pop_back();
+            used[i] = false;
+        }
+    };
+
+    dfs();
+    return res;
+}
+
+// #47
+std::vector<std::vector<int>> permutations_de_dup(std::vector<int>& nums)
+{
+    std::vector<std::vector<int>> res;
+    int n = nums.size();
+    if (n == 0) return res;
+
+    std::vector<bool> used(n, false);
+    std::vector<int> cur;
+
+    std::function<void()> dfs = [&]()
+    {
+        if (cur.size() == n)
+        {
+            res.push_back(cur);
+            return;
+        }
+
+        for (int i = 0; i < n; ++i)
+        {
+            if (used[i]) continue;
+            if (i > 0 && nums[i] == nums[i-1] && !used[i-1]) continue;
+
+            cur.push_back(nums[i]);
+            used[i] = true;
+
+            dfs();
+
+            cur.pop_back();
+            used[i] = false;
+        }
+    };
+
+    dfs();
+    return res;
+}
