@@ -31,4 +31,7 @@ std::vector<std::string> generate_parenthes(int n);
 // #301
 std::vector<std::string> remove_invalid_parenthes(std::string raw);
 
+// #79
+bool search_word(std::vector<std::vector<char>>& board, std::string word);
+
 #endif //LEETCODE_SEARCH_H

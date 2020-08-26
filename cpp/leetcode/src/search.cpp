@@ -314,3 +314,29 @@ std::vector<std::string> remove_invalid_parenthes(std::string raw)
 
     return res;
 }
+
+// #79
+bool search_word(std::vector<std::vector<char>>& board, std::string word)
+{
+    std::vector<std::vector<int>> dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+    std::function<bool(int, int, int)> msearch = [&](int x, int y, int i)
+    {
+        if (x < 0 || y < 0 || x >= board.size() || y >= board[0].size()) return false;
+
+        if (i == word.size()) return true;
+
+        if (board[x][y] == word[i]) return
+            msearch(x + dirs[0][0], y + dirs[0][1], i + 1) ||
+            msearch(x + dirs[1][0], y + dirs[1][1], i + 1) ||
+            msearch(x + dirs[2][0], y + dirs[2][1], i + 1) ||
+            msearch(x + dirs[3][0], y + dirs[3][1], i + 1);
+
+        return false;
+    };
+
+    for (int i = 0; i < board.size(); ++i)
+        for (int j = 0; j < board[0].size(); ++j)
+            if (msearch(i, j, 0)) return true;
+    return false;
+}
