@@ -102,3 +102,16 @@ TEST(search, generate_parenthes_tests)
     std::vector<std::string> exp3 = {"((()))", "(()())", "(())()", "()(())", "()()()" };
     EXPECT_EQ (generate_parenthes(3), exp3);
 }
+
+TEST(search, remove_invalid_parenthes_tests)
+{
+    std::vector<std::string> exp1 = {"()()()", "(())()"};
+    EXPECT_EQ (remove_invalid_parenthes("()())()"), exp1);
+
+    std::vector<std::string> exp2 = {"(a)()()", "(a())()"};
+    EXPECT_EQ (remove_invalid_parenthes("(a)())()"), exp2);
+
+    std::vector<std::string> exp3 = {};
+    EXPECT_EQ (remove_invalid_parenthes(")("), exp3);
+
+}

@@ -294,3 +294,23 @@ std::vector<std::string> generate_parenthes(int n)
 
     return res;
 }
+
+// #301
+std::vector<std::string> remove_invalid_parenthes(std::string raw)
+{
+    std::vector<std::string> res;
+    if (raw.size() == 0) return res;
+
+    int l = 0, r = 0;
+    for (auto c: raw)
+    {
+        if (c == ')') ++l;
+        if (c == '(') ++r;
+    }
+
+    std::string cur;
+
+    // FIXME
+
+    return res;
+}
