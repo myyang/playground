@@ -51,3 +51,15 @@ TEST(two_pointer, Q992_subarray_with_k_diff_tests)
     std::vector<int> nums2 = {1,2,1,3,4};
     EXPECT_EQ (subarray_with_k_diff(nums2, 3), 3);
 }
+
+TEST(two_pointer, Q885_boats_to_save_people_tests)
+{
+    std::vector<int> nums1 = {1,2};
+    EXPECT_EQ (boats_to_save_people(nums1, 3), 1);
+
+    std::vector<int> nums2 = {3,2,2,1};
+    EXPECT_EQ (boats_to_save_people(nums2, 3), 3);
+
+    std::vector<int> nums3 = {3, 5, 3, 4};
+    EXPECT_EQ (boats_to_save_people(nums3, 5), 4);
+}

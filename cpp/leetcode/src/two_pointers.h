@@ -22,4 +22,7 @@ std::vector<int> squares_of_sorted_array(std::vector<int>& nums);
 // #992
 int subarray_with_k_diff(std::vector<int>& nums, int k);
 
+// #885
+int boats_to_save_people(std::vector<int>& nums, int k);
+
 #endif

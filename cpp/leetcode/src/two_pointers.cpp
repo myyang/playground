@@ -163,3 +163,23 @@ int subarray_with_k_diff(std::vector<int>& nums, int k)
 
    return subarrays(k) - subarrays(k-1);
 }
+
+// #885
+int boats_to_save_people(std::vector<int>& nums, int k)
+{
+    int n = nums.size();
+    if (n == 0) return n;
+
+    std::sort(nums.begin(), nums.end());
+    int l = 0, r = n-1, res = 0;
+
+    while (l <= r)
+    {
+        int c = k;
+        while (c-nums[r] >= 0 && l <= r) c -= nums[r--];
+        while (c-nums[l] >= 0 && l <= r) c -= nums[l++];
+        ++res;
+    }
+
+    return res;
+}
