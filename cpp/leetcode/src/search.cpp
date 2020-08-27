@@ -16,11 +16,12 @@ void letter_combination_dfs(
 {
     if (idx == digits.size())
     {
+        // check cur is not empty
         if (cur != "") res.push_back(cur);
         return;
     }
 
-    if (digits[idx] == '1')
+    if (digits[idx] == '1') // note that '1' is empty
     {
         letter_combination_dfs(idx+1, digits, cur, char_map, res);
         return;
@@ -65,6 +66,7 @@ void combination_sum_dfs(
         std::vector<std::vector<int>>& res)
 {
 
+    // check size not empty because there maybe 0 elements
     if (target == 0 && cur.size() != 0) {
         res.push_back(cur);
         return;
@@ -97,7 +99,7 @@ void combination_sum_dfs_de_dup(
         int target,
         std::vector<int>& nums,
         std::vector<int>& cur,
-        std::set<std::vector<int>>& res)
+        std::set<std::vector<int>>& res)  // use set to remove de deuplicated
 {
     if (target == 0 && cur.size() != 0)
     {
@@ -214,6 +216,7 @@ std::vector<std::vector<int>> permutations_de_dup(std::vector<int>& nums)
         for (int i = 0; i < n; ++i)
         {
             if (used[i]) continue;
+            // prevent use same nums
             if (i > 0 && nums[i] == nums[i-1] && !used[i-1]) continue;
 
             cur.push_back(nums[i]);
@@ -244,7 +247,19 @@ std::vector<std::string> letter_case_permutation(std::string raw)
             return;
         }
 
-        dfs(d+1);
+        dfs(d+1); // dfs first make less wrong
+
+        // don't check alpha before walk deeper
+        // such as
+        // if ( std::isalpha(raw[d] )
+        // {
+        //  raw[d] ^= (1 << 5);
+        //  dfs(d+1);
+        //  raw[d] ^= (1 << 5);
+        //  dfs(d+1);  // this should move out of block as follow
+        // }
+        //  //dfs(d+1);
+
         if ( !std::isalpha(raw[d]) ) return;
 
         raw[d] ^= (1 << 5);
@@ -273,7 +288,7 @@ std::vector<std::string> generate_parenthes(int n)
             return;
         }
 
-        if (l > r) return;
+        if (l > r) return; // pruning invalid case
 
         if (l > 0)
         {
@@ -326,11 +341,17 @@ bool search_word(std::vector<std::vector<char>>& board, std::string word)
 
         if (i == word.size()) return true;
 
-        if (board[x][y] == word[i]) return
-            msearch(x + dirs[0][0], y + dirs[0][1], i + 1) ||
+        if (board[x][y] == word[i]) {
+            char tmp = board[x][y]; // set invalid char to prevent repeatly visiting
+
+            bool r = msearch(x + dirs[0][0], y + dirs[0][1], i + 1) ||
             msearch(x + dirs[1][0], y + dirs[1][1], i + 1) ||
             msearch(x + dirs[2][0], y + dirs[2][1], i + 1) ||
             msearch(x + dirs[3][0], y + dirs[3][1], i + 1);
+
+            board[x][y] = tmp;
+            return r;
+        }
 
         return false;
     };

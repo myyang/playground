@@ -6,7 +6,7 @@
 #include "search.h"
 
 
-TEST(search, letter_combination_tests)
+TEST(search, Q17_letter_combination_tests)
 {
     std::vector<std::string> exp = {};
     EXPECT_EQ (letter_combination(""), exp);
@@ -30,7 +30,7 @@ TEST(search, letter_combination_tests)
     EXPECT_EQ (letter_combination("1"), exp1);
 }
 
-TEST(search, combination_sum_tests)
+TEST(search, Q39_combination_sum_tests)
 {
     std::vector<int> nums = {2, 2, 3, 4, 5, 7};
 
@@ -41,7 +41,7 @@ TEST(search, combination_sum_tests)
     EXPECT_EQ (combination_sum(nums, 21), exp21);
 }
 
-TEST(search, combination_sum_de_dup_tests)
+TEST(search, Q40_combination_sum_de_dup_tests)
 {
     std::vector<int> nums = {2, 2, 3, 4, 5, 7};
 
@@ -52,7 +52,7 @@ TEST(search, combination_sum_de_dup_tests)
     EXPECT_EQ (combination_sum_de_dup(nums, 21), exp21);
 }
 
-TEST(search, combination_sum_3_tests)
+TEST(search, Q216_combination_sum_3_tests)
 {
     std::vector<std::vector<int>> exp37 = {{1,2,4}};
     EXPECT_EQ (combination_sum_3(3, 7), exp37);
@@ -61,7 +61,7 @@ TEST(search, combination_sum_3_tests)
     EXPECT_EQ (combination_sum_3(3, 9), exp39);
 }
 
-TEST(search, permutations_tests)
+TEST(search, Q46_permutations_tests)
 {
     std::vector<int> nums3 = {1,2,3};
     std::vector<std::vector<int>> exp3 = {
@@ -70,7 +70,7 @@ TEST(search, permutations_tests)
     EXPECT_EQ (permutations(nums3), exp3);
 }
 
-TEST(search, permutations_de_dup_tests)
+TEST(search, Q47_permutations_de_dup_tests)
 {
     std::vector<int> nums3 = {1,1,2};
     std::vector<std::vector<int>> exp3 = {
@@ -85,7 +85,7 @@ TEST(search, permutations_de_dup_tests)
     EXPECT_EQ (permutations_de_dup(nums4), exp4);
 }
 
-TEST(search, letter_case_permutation_tests)
+TEST(search, Q784_letter_case_permutation_tests)
 {
     std::vector<std::string> exp1 = {"a1b2", "a1B2", "A1b2", "A1B2"};
     EXPECT_EQ (letter_case_permutation("a1b2"), exp1);
@@ -94,7 +94,7 @@ TEST(search, letter_case_permutation_tests)
     EXPECT_EQ (letter_case_permutation("12345"), exp2);
 }
 
-TEST(search, generate_parenthes_tests)
+TEST(search, Q22_generate_parenthes_tests)
 {
     std::vector<std::string> exp1 = {"()"};
     EXPECT_EQ (generate_parenthes(1), exp1);
@@ -103,7 +103,7 @@ TEST(search, generate_parenthes_tests)
     EXPECT_EQ (generate_parenthes(3), exp3);
 }
 
-TEST(search, remove_invalid_parenthes_tests)
+TEST(search, Q301_remove_invalid_parenthes_tests)
 {
     std::vector<std::string> exp1 = {"()()()", "(())()"};
     EXPECT_EQ (remove_invalid_parenthes("()())()"), exp1);
