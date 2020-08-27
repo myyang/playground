@@ -4,7 +4,7 @@
 
 #include "binary_search.h"
 
-TEST(binary_search, search_insert_position_tests)
+TEST(binary_search, Q35_search_insert_position_tests)
 {
     std::vector<int> even = {3,5,7,9};
     EXPECT_EQ (search_insert_position(even, 0), 0);
@@ -34,7 +34,7 @@ TEST(binary_search, search_insert_position_tests)
     EXPECT_EQ (search_insert_position(duplicates, 8), 4);
 }
 
-TEST(binary_search, search_range_tests)
+TEST(binary_search, Q34_search_range_tests)
 {
     std::vector<int> duplicates = {5,5,7,7};
     std::vector<int> not_found = {-1, -1}, found_5 = {0, 1}, found_7 = {2, 3};
@@ -44,7 +44,7 @@ TEST(binary_search, search_range_tests)
     EXPECT_EQ (search_range(duplicates, 8), not_found);
 }
 
-TEST(binary_search, search_min_in_rotated_array_tests)
+TEST(binary_search, Q153_Q154_search_min_in_rotated_array_tests)
 {
     std::vector<int>
         rotate0 = {0,1,3,5},
@@ -66,7 +66,7 @@ TEST(binary_search, search_min_in_rotated_array_tests)
     EXPECT_EQ (search_min_in_rotated_array(drotate3), 0);
 }
 
-TEST(binary_search, koko_eating_bananas_tests)
+TEST(binary_search, Q875_koko_eating_bananas_tests)
 {
     std::vector<int>
         p0 = {3,6,7,11},
@@ -77,7 +77,7 @@ TEST(binary_search, koko_eating_bananas_tests)
     EXPECT_EQ (koko_eating_bananas(p1, 6), 23);
 }
 
-TEST(binary_search, capacity_to_ship_pkgs_tests)
+TEST(binary_search, Q1011_capacity_to_ship_pkgs_tests)
 {
     std::vector<int>
         p0 = {1,2,3,4,5,6,7,8,9,10},
