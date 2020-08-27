@@ -176,10 +176,32 @@ int boats_to_save_people(std::vector<int>& nums, int k)
     while (l <= r)
     {
         int c = k;
+        // not that l <= r is required to prevent over counting
         while (c-nums[r] >= 0 && l <= r) c -= nums[r--];
         while (c-nums[l] >= 0 && l <= r) c -= nums[l++];
         ++res;
     }
 
+    return res;
+}
+
+// #986
+std::vector<std::vector<int>> intersections_of_lists(std::vector<std::vector<int>>& A, std::vector<std::vector<int>>& B)
+{
+    std::vector<std::vector<int>> res;
+    int i = 0, j = 0;
+    while (i < A.size() && j < B.size())
+    {
+        // find directly with min max
+        int start = std::max(A[i][0], B[j][0]);
+        int end = std::min(A[i][1], B[j][1]);
+
+        // equal is acceptable
+        if (start <= end) res.push_back({start, end});
+
+        // move smaller list forward
+        if (A[i][1] < B[j][1]) ++i;
+        else ++j;
+    }
     return res;
 }

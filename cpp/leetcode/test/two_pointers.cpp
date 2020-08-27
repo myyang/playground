@@ -63,3 +63,12 @@ TEST(two_pointer, Q885_boats_to_save_people_tests)
     std::vector<int> nums3 = {3, 5, 3, 4};
     EXPECT_EQ (boats_to_save_people(nums3, 5), 4);
 }
+
+TEST(two_pointer, Q986_intersections_of_lists_test)
+{
+    std::vector<std::vector<int>> A = {{0,2},{5,10},{13,23},{24,25}};
+    std::vector<std::vector<int>> B = {{1,5},{8,12},{15,24},{25,26}};
+    std::vector<std::vector<int>> exp = {{1,2},{5,5},{8,10},{15,23},{24,24},{25,25}};
+
+    EXPECT_EQ (intersections_of_lists(A, B), exp);
+}
