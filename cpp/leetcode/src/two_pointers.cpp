@@ -22,6 +22,7 @@ int contain_most_water(std::vector<int>& nums)
     while (l < r)
     {
         most = std::max(most, std::min(nums[l], nums[r]) * (r-l));
+        // remember to move pointer every run
         if (nums[l] > nums[r]) --r;
         else ++l;
     }
@@ -73,6 +74,8 @@ std::string reverse_only_letters(std::string raw)
         }
         else
         {
+            // don't use while for continuous moving
+            // correctly move 1 step each time
             if (!std::isalpha(raw[l])) ++l;
             if (!std::isalpha(raw[r])) --r;
         }
@@ -92,12 +95,14 @@ bool long_pressed_name(std::string name, std::string typed)
             ++i;
             ++j;
         }
+        // this is second condition so compare typed for repeated is ok
         else if (j > 0 && typed[j-1] == typed[j])
             ++j;
         else
             return false;
     }
 
+    // last repeated
     while (j < typed.size() && typed[j] == typed[j-1]) ++j;
     return i == name.size() && j == typed.size();
 }
@@ -135,6 +140,7 @@ int subarray_with_k_diff(std::vector<int>& nums, int k)
    int n = nums.size();
    if (n == 0) return n;
 
+   // count subarray numbers with distinct ik numbers
    std::function<int(int)> subarrays = [&](int ik)
    {
        std::vector<int> count(n+1);
