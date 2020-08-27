@@ -16,4 +16,10 @@ std::string reverse_only_letters(std::string raw);
 // #925
 bool long_pressed_name(std::string name, std::string typed);
 
+// #977
+std::vector<int> squares_of_sorted_array(std::vector<int>& nums);
+
+// #992
+int subarray_with_k_diff(std::vector<int>& nums, int k);
+
 #endif

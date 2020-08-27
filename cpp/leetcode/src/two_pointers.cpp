@@ -4,6 +4,9 @@
 #include <string>
 #include <locale> // std::isalpha
 #include <utility> // std::swap
+#include <cstdlib> // std::abs(int)
+#include <map>
+#include <functional> // std::function
 
 // #11
 int contain_most_water(std::vector<int>& nums)
@@ -97,4 +100,60 @@ bool long_pressed_name(std::string name, std::string typed)
 
     while (j < typed.size() && typed[j] == typed[j-1]) ++j;
     return i == name.size() && j == typed.size();
+}
+
+// #977
+std::vector<int> squares_of_sorted_array(std::vector<int>& nums)
+{
+    int n = nums.size();
+    std::vector<int> res;
+    if (n == 0) return res;
+
+    int l = 0, r = n-1;
+    while (l < r)
+    {
+        if (std::abs(nums[l]) > std::abs(nums[r]))
+        {
+            res.push_back(nums[l] * nums[l]);
+            ++l;
+        }
+        else
+        {
+            res.push_back(nums[r] * nums[r]);
+            --r;
+        }
+    }
+    res.push_back(nums[l] * nums[l]);
+
+    std::reverse(res.begin(), res.end());
+    return res;
+}
+
+// #992
+int subarray_with_k_diff(std::vector<int>& nums, int k)
+{
+   int n = nums.size();
+   if (n == 0) return n;
+
+   std::function<int(int)> subarrays = [&](int ik)
+   {
+       std::vector<int> count(n+1);
+       int ans = 0, i = 0;
+
+       for (int j = 0; j < n; ++j)
+       {
+           if (count[nums[j]]++ == 0) --ik;
+
+           while (ik < 0)
+           {
+               if (--count[nums[i++]] == 0) ++ik;
+           }
+
+           ans += j - i + 1;
+       }
+
+       return ans;
+   };
+
+   return subarrays(k) - subarrays(k-1);
 }

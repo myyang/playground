@@ -31,3 +31,23 @@ TEST(two_pointer, long_pressed_name_tests)
     EXPECT_EQ (long_pressed_name("leelee", "lleeelee"), true);
     EXPECT_EQ (long_pressed_name("laiden", "laiden"), true);
 }
+
+TEST(two_pointer, squares_of_sorted_array_tests)
+{
+    std::vector<int> nums1 = {0,1,2,3,4};
+    std::vector<int> exp1 = {0, 1, 4, 9, 16};
+    EXPECT_EQ (squares_of_sorted_array(nums1), exp1);
+
+    std::vector<int> nums2 = {-3, -1, 0,2,4};
+    std::vector<int> exp2 = {0, 1, 4, 9, 16};
+    EXPECT_EQ (squares_of_sorted_array(nums2), exp2);
+}
+
+TEST(two_pointer, subarray_with_k_diff_tests)
+{
+    std::vector<int> nums1 = {1,2,1,2,3};
+    EXPECT_EQ (subarray_with_k_diff(nums1, 2), 7);
+
+    std::vector<int> nums2 = {1,2,1,3,4};
+    EXPECT_EQ (subarray_with_k_diff(nums2, 3), 3);
+}
