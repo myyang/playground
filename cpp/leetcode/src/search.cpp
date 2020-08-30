@@ -316,16 +316,76 @@ std::vector<std::string> remove_invalid_parenthes(std::string raw)
     std::vector<std::string> res;
     if (raw.size() == 0) return res;
 
-    int l = 0, r = 0;
+    int lp = 0, rp = 0;
     for (auto c: raw)
     {
-        if (c == ')') ++l;
-        if (c == '(') ++r;
+        lp += (c == '(');
+        if (lp == 0)
+            rp += (c == ')');
+        else
+            lp -= ( c == ')');
     }
 
-    std::string cur;
+    std::function<bool(std::string)> is_valid = [](std::string s) {
+        int p = 0;
+        for (char c: s)
+        {
+            if (c == '(') ++p;
+            if (c == ')') --p;
+            if (p < 0) return false;
+        }
 
-    // FIXME
+        return p == 0 ? true: false;
+    };
+
+    std::function<void(std::string, int, int, int)> dfs = [&](std::string s, int start, int l, int r)
+    {
+
+        if (l == 0 && r == 0) {
+            // check valid result is required
+            // the "()())()" case would get
+            //  { "(())()", "()()()", "()())(" } with an extra wrong answers
+            if (is_valid(s)) res.push_back(s);
+            return;
+        }
+
+        for (int i = start; i < s.size(); ++i)
+        {
+            if (i != start && s[i] == s[i-1]) continue;
+
+            if (s[i] == '(' || s[i] == ')')
+            {
+                std::string curr = s;
+                curr.erase(i, 1);
+                if (r > 0 && s[i] == ')')
+                    dfs(curr, i, l, r-1);
+                if (l > 0 && s[i] == '(')
+                    dfs(curr, i, l-1, r);
+            }
+        }
+        // following is wrong implementation with correct idea
+        // check:
+        //  * std::string erase usage
+        //  * the dfs next start value should be related to i
+        //  * the next start doesn't need +1 because we erase the string
+        //
+        //if (l > 0 && cur[i] == '(')
+        //{
+        //    std::string tmp = cur;
+        //    tmp.erase(i, i);
+        //    dfs(tmp, start+1, l-1, r);
+        //}
+
+        //if (r > 0 && cur[i] == ')')
+        //{
+        //    std::string tmp = cur;
+        //    tmp.erase(i, i);
+        //    dfs(tmp, start+1, l, r-1);
+        //}
+
+    };
+
+    dfs(raw, 0, lp, rp);
 
     return res;
 }
