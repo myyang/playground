@@ -115,3 +115,12 @@ TEST(search, Q301_remove_invalid_parenthes_tests)
     EXPECT_EQ (remove_invalid_parenthes(")("), exp3);
 
 }
+
+TEST(search, Q698_partition_k_equal_sum_subset_tests)
+{
+    std::vector<int> nums = {4, 3, 2, 3, 5, 2, 1};
+    EXPECT_EQ (partition_k_equal_sum_subset(nums, 4), true);
+    EXPECT_EQ (partition_k_equal_sum_subset(nums, 3), false);
+    EXPECT_EQ (partition_k_equal_sum_subset(nums, 2), true);
+    EXPECT_EQ (partition_k_equal_sum_subset(nums, 1), true);
+}

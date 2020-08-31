@@ -5,6 +5,7 @@
 #include <set>
 #include <functional>
 #include <cctype>
+#include <numeric>  // std::accumulate
 
 // #17
 void letter_combination_dfs(
@@ -420,4 +421,38 @@ bool search_word(std::vector<std::vector<char>>& board, std::string word)
         for (int j = 0; j < board[0].size(); ++j)
             if (msearch(i, j, 0)) return true;
     return false;
+}
+
+// #698
+bool partition_k_equal_sum_subset(std::vector<int>& nums, int k)
+{
+    int sum = std::accumulate(nums.begin(), nums.end(), 0);
+    if ((sum % k) != 0) return false;
+
+    std::sort(nums.begin(), nums.end());
+
+    int target = sum / k;
+
+    std::function<bool(int, int, int, int)> dfs = [&](int cur, int idx, int k, int used)
+    {
+        if (k == 0) return used == (1 << nums.size()) - 1;
+
+        for (int i = 0; i < nums.size(); ++i)
+        {
+            // careful this & not &&
+            if (used & (1 << i)) continue;
+
+            int t = cur - nums[i];
+            if (t < 0) break;
+
+            int new_used = used | (1 << i);
+
+            if (t == 0 && dfs(target, 0, k-1, new_used)) return true;
+            else if (dfs(t, 0, k, new_used)) return true;
+        }
+
+        return false;
+    };
+
+    return dfs(target, 0, k, 0);
 }

@@ -34,4 +34,7 @@ std::vector<std::string> remove_invalid_parenthes(std::string raw);
 // #79
 bool search_word(std::vector<std::vector<char>>& board, std::string word);
 
+// #698
+bool partition_k_equal_sum_subset(std::vector<int>& nums, int k);
+
 #endif //LEETCODE_SEARCH_H
