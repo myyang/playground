@@ -513,3 +513,35 @@ std::vector<int> diff_ways_to_add_parentheses(std::string input)
 
     return dfs(input);
 }
+
+// #93
+std::vector<std::string> restore_ip_addresses(std::string input)
+{
+    std::vector<std::string> res;
+    if (input.size() == 0) return res;
+
+    std::function<void(int, std::string, std::string)> dfs = [&](int d, std::string left, std::string cur)
+    {
+        if (d == 4)
+        {
+            if (left.size() == 0) res.push_back(cur);
+            return;
+        }
+        // check empty left
+        if (left.size() == 0) return;
+
+        int l = left.length();
+        for (int i = 1; i <= std::min(3, left[0] == '0' ? 1 : l); ++i)
+        {
+            std::string sub = left.substr(0, i);
+            // pruning to reduce redundant computing
+            if (i == 3 && stoi(sub) > 255) return;
+            dfs(d+1, left.substr(i), cur + (d==0 ? "" : ".") + sub);
+
+        }
+    };
+
+    dfs(0, input, "");
+
+    return res;
+}

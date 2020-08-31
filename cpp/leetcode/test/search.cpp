@@ -133,3 +133,18 @@ TEST(search, Q201_diff_ways_to_add_parentheses_tests)
     std::vector<int> exp2 = {-34, -10, -14, -10, 10};
     EXPECT_EQ (diff_ways_to_add_parentheses("2*3-4*5"), exp2);
 }
+
+TEST(search, Q93_restore_ip_addresses_tests)
+{
+    std::vector<std::string> exp1 = {"255.255.11.135", "255.255.111.35"};
+    EXPECT_EQ (restore_ip_addresses("25525511135"), exp1);
+
+    std::vector<std::string> exp2 = {"25.50.1.110", "25.50.11.10", "25.50.111.0", "255.0.1.110", "255.0.11.10", "255.0.111.0"};
+    EXPECT_EQ (restore_ip_addresses("25501110"), exp2);
+
+    std::vector<std::string> exp3 = {"0.0.0.0"};
+    EXPECT_EQ (restore_ip_addresses("0000"), exp3);
+
+    std::vector<std::string> exp4 = {"0.10.10.10", "0.10.101.0", "0.101.0.10"};
+    EXPECT_EQ (restore_ip_addresses("0101010"), exp4);
+}

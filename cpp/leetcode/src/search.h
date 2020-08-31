@@ -40,4 +40,7 @@ bool partition_k_equal_sum_subset(std::vector<int>& nums, int k);
 // #201
 std::vector<int> diff_ways_to_add_parentheses(std::string input);
 
+// #93
+std::vector<std::string> restore_ip_addresses(std::string input);
+
 #endif //LEETCODE_SEARCH_H
