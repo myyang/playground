@@ -124,3 +124,12 @@ TEST(search, Q698_partition_k_equal_sum_subset_tests)
     EXPECT_EQ (partition_k_equal_sum_subset(nums, 2), true);
     EXPECT_EQ (partition_k_equal_sum_subset(nums, 1), true);
 }
+
+TEST(search, Q201_diff_ways_to_add_parentheses_tests)
+{
+    std::vector<int> exp1 = {2, 0};
+    EXPECT_EQ (diff_ways_to_add_parentheses("2-1-1"), exp1);
+
+    std::vector<int> exp2 = {-34, -10, -14, -10, 10};
+    EXPECT_EQ (diff_ways_to_add_parentheses("2*3-4*5"), exp2);
+}

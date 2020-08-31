@@ -6,6 +6,7 @@
 #include <functional>
 #include <cctype>
 #include <numeric>  // std::accumulate
+#include <unordered_map>
 
 // #17
 void letter_combination_dfs(
@@ -455,4 +456,60 @@ bool partition_k_equal_sum_subset(std::vector<int>& nums, int k)
     };
 
     return dfs(target, 0, k, 0);
+}
+
+// #201
+std::vector<int> diff_ways_to_add_parentheses(std::string input)
+{
+    std::vector<int> res;
+    if (input.size() == 0) return res;
+
+    std::function<int(int, int)> add = [](int a, int b) { return a + b; };
+    std::function<int(int, int)> sub = [](int a, int b) { return a - b; };
+    std::function<int(int, int)> mul = [](int a, int b) { return a * b; };
+
+    std::unordered_map<std::string, std::vector<int>> m_;
+
+    std::function<std::vector<int>(std::string&)> dfs = [&](std::string& raw)
+    {
+        if (m_.count(raw)) return m_[raw];
+
+        std::vector<int> ans;
+
+        for (int i = 0; i < raw.size(); ++i)
+        {
+            char op = raw[i];
+
+            if (op == '+' || op == '-' || op == '*')
+            {
+                std::string left = raw.substr(0, i);
+                std::string right = raw.substr(i+1);
+
+                std::vector<int> l = dfs(left);
+                std::vector<int> r = dfs(right);
+
+                std::function<int(int, int)> f;
+
+                switch(op)
+                {
+                    case '+': f = add; break;
+                    case '-': f = sub; break;
+                    case '*': f = mul; break;
+                }
+
+                for (int a: l)
+                    for (int b: r)
+                        ans.push_back(f(a,b));
+            }
+
+        }
+
+        if (ans.empty())
+            ans.push_back(stoi(raw));
+
+        m_[raw].swap(ans);
+        return m_[raw];
+    };
+
+    return dfs(input);
 }
