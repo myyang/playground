@@ -166,3 +166,15 @@ TEST(search, Q282_expression_add_operator_tests)
     std::vector<std::string> exp2 = {"1*0+5","10-5"};
     EXPECT_EQ (expression_add_operator("105", 5), exp2);
 }
+
+TEST(search, Q842_fib_seq_tests)
+{
+    std::vector<int> exp1 = {1, 0, 1};
+    EXPECT_EQ (fib_seq("101"), exp1);
+
+    std::vector<int> exp2 = {11, 0, 11};
+    EXPECT_EQ (fib_seq("11011"), exp2);
+
+    std::vector<int> exp3 = {123, 456, 579};
+    EXPECT_EQ (fib_seq("123456579"), exp3);
+}

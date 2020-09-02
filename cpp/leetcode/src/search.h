@@ -1,6 +1,5 @@
 #ifndef LEETCODE_SEARCH_H
 #define LEETCODE_SEARCH_H
-
 #include <vector>
 #include <string>
 
@@ -48,5 +47,8 @@ std::vector<std::vector<std::string>> palindrome_partition(std::string input);
 
 // #282
 std::vector<std::string> expression_add_operator(std::string input, int target);
+
+// #842
+std::vector<int> fib_seq(std::string input);
 
 #endif //LEETCODE_SEARCH_H

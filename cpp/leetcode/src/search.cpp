@@ -633,3 +633,58 @@ std::vector<std::string> expression_add_operator(std::string input, int target)
 
     return res;
 }
+
+// #842
+std::vector<int> fib_seq(std::string input)
+{
+    std::vector<int> res;
+    if (input.size() == 0) return res;
+
+    std::vector<int> cur;
+
+    std::function<void()> print_cur = [&]() {
+        std::cout << "size: " << cur.size() << " cur: ";
+        for (auto c: cur) std::cout << c << ", ";
+        std::cout << std::endl << std::endl;
+    };
+
+    std::function<bool()> is_valid_cur = [&]() {
+        if (cur.size() < 3) return false;
+
+        for (int i = 2; i < cur.size(); ++i)
+        {
+            if (cur[i] != cur[i-1] + cur[i-2]) return false;
+        }
+        return true;
+    };
+
+    std::function<void(int)> dfs = [&](int start)
+    {
+
+        if (start == input.size())
+        {
+            if (is_valid_cur()) res = cur;
+            return;
+        }
+
+        for (int i = 1; i <= input.size() - start; ++i)
+        {
+            std::string sub = input.substr(start, i);
+            int sub_num = std::stoi(sub);
+
+            cur.push_back(sub_num);
+            if (cur.size() < 3) dfs(start + i);
+            else
+            {
+                int n = cur.size()-1;
+                if (cur[n-1] + cur[n-2] == sub_num) dfs(start+i);
+            }
+            cur.pop_back();
+
+        }
+    };
+
+    dfs(0);
+
+    return res;
+}
