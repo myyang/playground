@@ -51,4 +51,8 @@ std::vector<std::string> expression_add_operator(std::string input, int target);
 // #842
 std::vector<int> fib_seq(std::string input);
 
+// #127
+int word_ladder(std::string start, std::string end, std::vector<std::string> words);
+int word_ladder_bi_dir(std::string start, std::string end, std::vector<std::string> words);
+
 #endif //LEETCODE_SEARCH_H

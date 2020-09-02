@@ -178,3 +178,15 @@ TEST(search, Q842_fib_seq_tests)
     std::vector<int> exp3 = {123, 456, 579};
     EXPECT_EQ (fib_seq("123456579"), exp3);
 }
+
+TEST(search, Q127_word_ladder_tests)
+{
+    std::vector<std::string> words1 = {"hot","dot","dog","lot","log","cog"};
+    EXPECT_EQ (word_ladder("hit", "cog", words1), 5);
+}
+
+TEST(search, Q127_word_ladder_bi_dir_tests)
+{
+    std::vector<std::string> words1 = {"hot","dot","dog","lot","log","cog"};
+    EXPECT_EQ (word_ladder_bi_dir("hit", "cog", words1), 5);
+}

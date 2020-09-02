@@ -7,6 +7,8 @@
 #include <cctype>
 #include <numeric>  // std::accumulate
 #include <unordered_map>
+#include <unordered_set>
+#include <queue>
 
 // #17
 void letter_combination_dfs(
@@ -687,4 +689,95 @@ std::vector<int> fib_seq(std::string input)
     dfs(0);
 
     return res;
+}
+
+// #127
+int word_ladder(std::string start, std::string end, std::vector<std::string> words)
+{
+    if (words.size() == 0 || start == end) return 0;
+
+    std::unordered_set<std::string> dict(words.begin(), words.end());
+
+    std::queue<std::string> q;
+    q.push(start);
+
+    int step = 0;
+
+    while (!q.empty())
+    {
+        ++step;
+
+        for (int size = q.size(); size > 0; --size)
+        {
+            std::string word = q.front();
+            q.pop();
+
+            for (int i = 0; i < word.size(); ++i)
+            {
+                char w = word[i];
+                for (int j = 'a'; j <= 'z'; ++j)
+                {
+                    word[i] = j;
+
+                    if (word == end) return step + 1;
+
+                    if (!dict.count(word)) continue;
+
+                    dict.erase(word);
+
+                    q.push(word);
+                }
+                word[i] = w;
+            }
+        }
+    }
+
+    return 0;
+}
+
+// #127
+int word_ladder_bi_dir(std::string start, std::string end, std::vector<std::string> words)
+{
+    if (words.size() == 0 || start == end) return 0;
+
+    std::unordered_set<std::string> dict(words.begin(), words.end());
+
+    std::unordered_set<std::string> q1;
+    std::unordered_set<std::string> q2;
+    q1.insert(start);
+    q2.insert(end);
+
+    int step = 0;
+
+    while (!q1.empty() && !q2.empty())
+    {
+        ++step;
+        if (q1.size() > q2.size()) std::swap(q1, q2);
+
+        std::unordered_set<std::string> q;
+
+        for (auto word: q1)
+        {
+            for (int i = 0; i < word.size(); ++i)
+            {
+                char w = word[i];
+                for (int j = 'a'; j <= 'z'; ++j)
+                {
+                    word[i] = j;
+                    if (q2.count(word)) return step+1;
+
+                    if (!dict.count(word)) continue;
+
+                    dict.erase(word);
+
+                    q.insert(word);
+                }
+                word[i] = w;
+            }
+        }
+
+        std::swap(q, q1);
+    }
+
+    return 0;
 }
