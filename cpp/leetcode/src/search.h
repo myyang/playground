@@ -46,4 +46,7 @@ std::vector<std::string> restore_ip_addresses(std::string input);
 // #131
 std::vector<std::vector<std::string>> palindrome_partition(std::string input);
 
+// #282
+std::vector<std::string> expression_add_operator(std::string input, int target);
+
 #endif //LEETCODE_SEARCH_H

@@ -157,3 +157,12 @@ TEST(search, Q131_palindrome_partition_tests)
     std::vector<std::vector<std::string>> exp2 = { {"a", "a", "a"}, {"a", "aa"}, {"aa", "a"}, {"aaa"} };
     EXPECT_EQ (palindrome_partition("aaa"), exp2);
 }
+
+TEST(search, Q282_expression_add_operator_tests)
+{
+    std::vector<std::string> exp1 = {"1+2+3", "1*2*3"};
+    EXPECT_EQ (expression_add_operator("123", 6), exp1);
+
+    std::vector<std::string> exp2 = {"1*0+5","10-5"};
+    EXPECT_EQ (expression_add_operator("105", 5), exp2);
+}

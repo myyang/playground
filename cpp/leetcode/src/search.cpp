@@ -590,3 +590,46 @@ std::vector<std::vector<std::string>> palindrome_partition(std::string input)
 
     return res;
 }
+
+// #282
+std::vector<std::string> expression_add_operator(std::string input, int target)
+{
+    std::vector<std::string> res;
+    if (input.size() == 0) return res;
+
+    long l_target = target;
+    std::function<void(int, long, long, std::string)> dfs = [&](int start, long pre, long cur, std::string exp)
+    {
+        if (start == input.size())
+        {
+            //printf("start: %d, pre: %ld, cur: %ld, exp: %s\n", start, pre, cur, exp.c_str());
+            if (cur == l_target) res.emplace_back(exp);
+            return;
+        }
+
+        for (int i = 0; i < input.size() - start + 1; ++i)
+        {
+            std::string sub = input.substr(start, i);
+            if (sub == "") continue;
+            if (sub[0] == '0' && sub.size() > 1) break; // 0[1-9]+ is invalid
+
+            long sub_num = stol(sub);
+
+            // first is corner case
+            if (start == 0)
+            {
+                dfs(i, sub_num, sub_num, sub);
+                continue;
+            }
+
+            dfs(start+i, sub_num, cur + sub_num, exp + '+' + sub);
+            dfs(start+i, -sub_num, cur - sub_num, exp + '-' + sub);
+            dfs(start+i, pre * sub_num, cur - pre + pre * sub_num, exp + '*' + sub);
+        }
+
+    };
+
+    dfs(0, 0, 0, "");
+
+    return res;
+}
