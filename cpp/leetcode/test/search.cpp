@@ -148,3 +148,12 @@ TEST(search, Q93_restore_ip_addresses_tests)
     std::vector<std::string> exp4 = {"0.10.10.10", "0.10.101.0", "0.101.0.10"};
     EXPECT_EQ (restore_ip_addresses("0101010"), exp4);
 }
+
+TEST(search, Q131_palindrome_partition_tests)
+{
+    std::vector<std::vector<std::string>> exp1 = { {"a", "a", "b"}, {"aa", "b"} };
+    EXPECT_EQ (palindrome_partition("aab"), exp1);
+
+    std::vector<std::vector<std::string>> exp2 = { {"a", "a", "a"}, {"a", "aa"}, {"aa", "a"}, {"aaa"} };
+    EXPECT_EQ (palindrome_partition("aaa"), exp2);
+}

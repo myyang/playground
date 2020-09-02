@@ -43,4 +43,7 @@ std::vector<int> diff_ways_to_add_parentheses(std::string input);
 // #93
 std::vector<std::string> restore_ip_addresses(std::string input);
 
+// #131
+std::vector<std::vector<std::string>> palindrome_partition(std::string input);
+
 #endif //LEETCODE_SEARCH_H

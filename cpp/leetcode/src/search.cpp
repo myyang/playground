@@ -547,3 +547,46 @@ std::vector<std::string> restore_ip_addresses(std::string input)
 
     return res;
 }
+
+// #131
+std::vector<std::vector<std::string>> palindrome_partition(std::string input)
+{
+    std::vector<std::vector<std::string>> res;
+    if (input.size() == 0) return res;
+
+    std::function<bool(std::string)> is_palindrome = [](std::string s)
+    {
+        if (s.size() <= 1) return true;
+
+        int l = 0, r = s.size()-1;
+        while (l < r)
+            if (s[l++] != s[r--]) return false;
+        return true;
+    };
+
+    std::vector<std::string> cur;
+
+    std::function<void(int)> dfs = [&](int start)
+    {
+        if (start == input.size())
+        {
+            res.push_back(cur);
+            return;
+        }
+
+        // count left length
+        for (int i = 0; i < input.size() - start + 1; ++i)
+        {
+            std::string sub = input.substr(start, i);
+            if (sub == "" || !is_palindrome(sub)) continue;
+
+            cur.push_back(sub);
+            dfs(start+i);
+            cur.pop_back();
+        }
+    };
+
+    dfs(0);
+
+    return res;
+}
