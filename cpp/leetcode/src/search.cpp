@@ -404,7 +404,8 @@ bool search_word(std::vector<std::vector<char>>& board, std::string word)
         if (i == word.size()) return true;
 
         if (board[x][y] == word[i]) {
-            char tmp = board[x][y]; // set invalid char to prevent repeatly visiting
+            char tmp = board[x][y];
+            board[x][y] = '#'; // set invalid char to prevent repeatly visiting
 
             bool r = msearch(x + dirs[0][0], y + dirs[0][1], i + 1) ||
             msearch(x + dirs[1][0], y + dirs[1][1], i + 1) ||
@@ -436,6 +437,8 @@ bool partition_k_equal_sum_subset(std::vector<int>& nums, int k)
 
     std::function<bool(int, int, int, int)> dfs = [&](int cur, int idx, int k, int used)
     {
+        // if nums size is 3
+        // all used would be 1000 (bin) - 1, 0111
         if (k == 0) return used == (1 << nums.size()) - 1;
 
         for (int i = 0; i < nums.size(); ++i)
@@ -527,10 +530,9 @@ std::vector<std::string> restore_ip_addresses(std::string input)
             if (left.size() == 0) res.push_back(cur);
             return;
         }
-        // check empty left
-        if (left.size() == 0) return;
 
         int l = left.length();
+        // empty length would not enter loop
         for (int i = 1; i <= std::min(3, left[0] == '0' ? 1 : l); ++i)
         {
             std::string sub = left.substr(0, i);
