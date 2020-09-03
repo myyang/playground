@@ -1,6 +1,5 @@
 #include <vector>
 #include <string>
-
 #include "gtest/gtest.h"
 
 #include "search.h"
@@ -209,4 +208,16 @@ TEST(search, Q126_word_ladder_2_rev_tests)
         {"hit", "hot", "lot", "log", "cog"},
     };
     EXPECT_EQ (word_ladder_2_rev("hit", "cog", words1), exp1);
+}
+
+TEST(search, Q752_open_the_lock_tests)
+{
+    std::vector<std::string> deadends1 = {"0201","0101","0102","1212","2002"};
+    EXPECT_EQ (open_the_lock("0202", deadends1), 6);
+
+    std::vector<std::string> deadends2 = {"0201","0101","0102","1212","2002"};
+    EXPECT_EQ (open_the_lock("0009", deadends2), 1);
+
+    std::vector<std::string> deadends3 = {"8887","8889","8878","8898","8788","8988","7888","9888"};
+    EXPECT_EQ (open_the_lock("8888", deadends3), -1);
 }

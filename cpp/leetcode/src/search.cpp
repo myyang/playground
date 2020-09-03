@@ -944,3 +944,53 @@ std::vector<std::vector<std::string>> word_ladder_2_seq(std::string start, std::
 
     return res;
 }
+
+// #752
+int open_the_lock(std::string target, std::vector<std::string> deadends)
+{
+    std::unordered_set<std::string> ends(deadends.begin(), deadends.end());
+    std::string start = "0000";
+
+    if (ends.count(target) || ends.count(start)) return -1;
+
+    int step = 0;
+
+    if (target == start) return step;
+
+    std::unordered_set<std::string> visited;
+    std::queue<std::string> q;
+    q.push(start);
+
+    while (!q.empty())
+    {
+        ++step;
+
+        for (int size = q.size(); size > 0; --size)
+        {
+            std::string cur = q.front();
+            q.pop();
+
+            for (int i = 0; i < 4; ++i)
+            {
+                // char ch = cur[i];
+                for (int j = -1; j <= 1; j +=2)
+                {
+                    // this doesn't work, because cur is replace/reverse in this loop
+                    // cur[i] = ((cur[i] - '0') + 10 + j) % 10 + '0';
+                    std::string next = cur;
+                    next[i] = ((next[i] - '0') + 10 + j) % 10 + '0';
+
+                    if (target == next) return step;
+                    if (visited.count(next) || ends.count(next)) continue;
+
+                    q.push(next);
+                    visited.emplace(next);
+                }
+                // cur[i] = ch;
+            }
+        }
+    }
+
+    return -1;
+
+}

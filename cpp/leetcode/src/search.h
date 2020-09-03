@@ -59,4 +59,7 @@ int word_ladder_bi_dir(std::string start, std::string end, std::vector<std::stri
 std::vector<std::vector<std::string>> word_ladder_2_seq(std::string start, std::string end, std::vector<std::string> words);
 std::vector<std::vector<std::string>> word_ladder_2_rev(std::string start, std::string end, std::vector<std::string> words);
 
+// #752
+int open_the_lock(std::string target, std::vector<std::string> deadends);
+
 #endif //LEETCODE_SEARCH_H
