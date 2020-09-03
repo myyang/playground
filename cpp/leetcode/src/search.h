@@ -55,4 +55,8 @@ std::vector<int> fib_seq(std::string input);
 int word_ladder(std::string start, std::string end, std::vector<std::string> words);
 int word_ladder_bi_dir(std::string start, std::string end, std::vector<std::string> words);
 
+// #126
+std::vector<std::vector<std::string>> word_ladder_2_seq(std::string start, std::string end, std::vector<std::string> words);
+std::vector<std::vector<std::string>> word_ladder_2_rev(std::string start, std::string end, std::vector<std::string> words);
+
 #endif //LEETCODE_SEARCH_H

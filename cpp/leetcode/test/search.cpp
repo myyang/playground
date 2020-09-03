@@ -190,3 +190,23 @@ TEST(search, Q127_word_ladder_bi_dir_tests)
     std::vector<std::string> words1 = {"hot","dot","dog","lot","log","cog"};
     EXPECT_EQ (word_ladder_bi_dir("hit", "cog", words1), 5);
 }
+
+TEST(search, Q126_word_ladder_2_seq_tests)
+{
+    std::vector<std::string> words1 = {"hot","dot","dog","lot","log","cog"};
+    std::vector<std::vector<std::string>> exp1 = {
+        {"hit", "hot", "dot", "dog", "cog"},
+        {"hit", "hot", "lot", "log", "cog"},
+    };
+    EXPECT_EQ (word_ladder_2_seq("hit", "cog", words1), exp1);
+}
+
+TEST(search, Q126_word_ladder_2_rev_tests)
+{
+    std::vector<std::string> words1 = {"hot","dot","dog","lot","log","cog"};
+    std::vector<std::vector<std::string>> exp1 = {
+        {"hit", "hot", "dot", "dog", "cog"},
+        {"hit", "hot", "lot", "log", "cog"},
+    };
+    EXPECT_EQ (word_ladder_2_rev("hit", "cog", words1), exp1);
+}

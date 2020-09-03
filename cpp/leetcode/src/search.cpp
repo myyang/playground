@@ -781,3 +781,166 @@ int word_ladder_bi_dir(std::string start, std::string end, std::vector<std::stri
 
     return 0;
 }
+
+// #126
+std::vector<std::vector<std::string>> word_ladder_2_rev(std::string start, std::string end, std::vector<std::string> words)
+{
+    std::unordered_set<std::string> dict(words.begin(), words.end());
+    if (!dict.count(end)) return {};
+    dict.erase(start);
+    dict.erase(end);
+
+    std::unordered_map<std::string, int> steps{{start, 1}};
+    std::unordered_map<std::string, std::vector<std::string>> parents;
+
+    std::queue<std::string> q;
+    q.push(start);
+
+    int step = 0;
+    bool found = false;
+
+    while (!q.empty() && !found)
+    {
+        ++step;
+        for (int size = q.size(); size > 0; --size)
+        {
+            std::string p = q.front();
+            q.pop();
+
+            std::string w = p;
+
+            for (int i = 0; i < p.size(); ++i)
+            {
+                char ch = w[i];
+                for (int j = 'a'; j <= 'z'; ++j)
+                {
+                    if (j == ch) continue;
+
+                    w[i] = j;
+                    if (w == end)
+                    {
+                        parents[w].push_back(p);
+                        found = true;
+                    }
+                    else
+                    {
+                        if (steps.count(w) && step < steps.at(w))
+                            parents[w].push_back(p);
+                    }
+
+                    if (!dict.count(w)) continue;
+                    dict.erase(w);
+                    q.push(w);
+                    steps[w] = steps.at(p) + 1;
+                    parents[w].push_back(p);
+                }
+                w[i] = ch;
+            }
+        }
+    }
+
+    std::vector<std::vector<std::string>> res;
+
+    if (found)
+    {
+        std::vector<std::string> cur{end};
+        std::function<void(std::string)> dfs = [&](std::string word)
+        {
+            if (word == start)
+            {
+                res.push_back(std::vector<std::string>(cur.rbegin(), cur.rend()));
+                return;
+            }
+
+            for (std::string p: parents.at(word))
+            {
+                cur.push_back(p);
+                dfs(p);
+                cur.pop_back();
+            }
+        };
+        dfs(end);
+    }
+
+    return res;
+}
+
+// #126
+std::vector<std::vector<std::string>> word_ladder_2_seq(std::string start, std::string end, std::vector<std::string> words)
+{
+    std::unordered_set<std::string> dict(words.begin(), words.end());
+    if (!dict.count(end)) return {};
+    dict.erase(end);
+
+    std::unordered_set<std::string> q{start}, p;
+    std::unordered_map<std::string, std::vector<std::string>> children;
+
+    int step = 0;
+    bool found = false;
+
+    while (!q.empty() && !found)
+    {
+        ++step;
+
+        for (std::string w: q)
+            dict.erase(w);
+
+        for (std::string w: q)
+        {
+            std::string r = w;
+
+            for (int i = 0; i < w.size(); ++i)
+            {
+                char ch = w[i];
+                for (int j = 'a'; j <= 'z'; ++j)
+                {
+                    if (j == ch) continue;
+
+                    w[i] = j;
+                    if (w == end)
+                    {
+                        found = true;
+                        children[r].push_back(w);
+                    }
+                    else if (dict.count(w) && !found)
+                    {
+                        p.emplace(w);
+                        children[r].push_back(w);
+                    }
+
+                    if (!dict.count(w)) continue;
+                    dict.erase(w);
+                }
+                w[i] = ch;
+            }
+        }
+
+        std::swap(q, p);
+        p.clear();
+    }
+
+    std::vector<std::vector<std::string>> res;
+
+    if (found)
+    {
+        std::vector<std::string> cur{start};
+        std::function<void(std::string)> dfs = [&](std::string word)
+        {
+            if (word == end)
+            {
+                res.push_back(cur);
+                return;
+            }
+
+            for (std::string w: children.at(word))
+            {
+                cur.push_back(w);
+                dfs(w);
+                cur.pop_back();
+            }
+        };
+        dfs(start);
+    }
+
+    return res;
+}
