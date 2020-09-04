@@ -994,3 +994,99 @@ int open_the_lock(std::string target, std::vector<std::string> deadends)
     return -1;
 
 }
+
+// #752
+int open_the_lock_bi_dir(std::string target, std::vector<std::string> deadends)
+{
+    std::unordered_set<std::string> ends(deadends.begin(), deadends.end());
+    std::string start = "0000";
+
+    if (ends.count(target) || ends.count(start)) return -1;
+    if (start == target) return 0;
+
+
+    int s1 = 0;
+    // note that init value
+    std::unordered_set<std::string> v1{start};
+    std::queue<std::string> q1;
+    q1.push(start);
+
+    int s2 = 0;
+    // note that init value
+    std::unordered_set<std::string> v2{target};
+    std::queue<std::string> q2;
+    q2.push(target);
+
+    while (!q1.empty() && !q2.empty())
+    {
+        if (!q1.empty()) ++s1;
+
+        for (int size = q1.size(); size > 0; --size)
+        {
+            std::string cur = q1.front();
+            q1.pop();
+
+            for (int i = 0; i < cur.size(); ++i)
+            {
+                for (int j = -1; j <= 1; j += 2)
+                {
+                    std::string next = cur;
+                    next[i] = (next[i] - '0' + 10 + j) % 10 + '0';
+                    if (v2.count(next)) return s1 + s2;
+                    if (ends.count(next) || v1.count(next)) continue;
+
+                    v1.insert(next);
+                    q1.push(next);
+                }
+            }
+        }
+
+        std::swap(q1, q2);
+        std::swap(v1, v2);
+        std::swap(s1, s2);
+    }
+
+    /* first implementation
+    std::unordered_set<std::string> q1{start};
+    std::unordered_set<std::string> q2{start};
+    std::unordered_set<std::string> q;
+
+    while (!q1.empty() || !q2.empty())
+    {
+        ++step;
+
+        printf(
+            "orig step: %d, q1: %d, q2: %d, q: %d\n",
+            step, int(q1.size()), int(q2.size()), int(q.size())
+        );
+
+        if (q1.size() > q2.size()) std::swap(q1, q2);
+
+        printf(
+            "swap step: %d, q1: %d, q2: %d, q: %d\n",
+            step, int(q1.size()), int(q2.size()), int(q.size())
+        );
+
+        for (std::string cur: q1)
+        {
+            for (int i = 0; i < cur.size(); ++i)
+            {
+                for (int j = -1; j <= 1; j += 2)
+                {
+                    std::string next = cur;
+                    cur[i] = ((cur[i] - '0') + 10 + j) % 10 + '0';
+                    if (q2.count(cur)) return step;
+                    if (ends.count(cur)) continue;
+
+                   q.emplace(cur);
+                }
+            }
+        }
+
+        q1.clear();
+        std::swap(q1, q);
+    }
+    */
+
+    return -1;
+}

@@ -61,5 +61,6 @@ std::vector<std::vector<std::string>> word_ladder_2_rev(std::string start, std::
 
 // #752
 int open_the_lock(std::string target, std::vector<std::string> deadends);
+int open_the_lock_bi_dir(std::string target, std::vector<std::string> deadends);
 
 #endif //LEETCODE_SEARCH_H
