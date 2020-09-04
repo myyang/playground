@@ -72,3 +72,17 @@ TEST(two_pointer, Q986_intersections_of_lists_test)
 
     EXPECT_EQ (intersections_of_lists(A, B), exp);
 }
+
+TEST(two_pointer, Q167_two_sum_2_tests)
+{
+    std::vector<int> nums1 = {2,7,9,11};
+    std::vector<int> ans1 = {0, 1};
+    EXPECT_EQ (two_sum_2(nums1, 9), ans1);
+
+    std::vector<int> ans2 = {1, 3};
+    EXPECT_EQ (two_sum_2(nums1, 18), ans2);
+
+    std::vector<int> ans3 = {};
+    EXPECT_EQ (two_sum_2(nums1, 21), ans3);
+
+}

@@ -205,3 +205,26 @@ std::vector<std::vector<int>> intersections_of_lists(std::vector<std::vector<int
     }
     return res;
 }
+
+// #167
+std::vector<int> two_sum_2(std::vector<int> nums, int k)
+{
+    std::vector<int> res;
+    int l = 0, r = nums.size()-1;
+
+    while (l < r)
+    {
+        int s = nums[l] + nums[r];
+        if (s == k)
+        {
+            res.push_back(l);
+            res.push_back(r);
+            break;
+        }
+
+        if (s < k) ++l;
+        else --r;
+    }
+
+    return res;
+}

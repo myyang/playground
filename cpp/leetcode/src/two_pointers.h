@@ -28,4 +28,7 @@ int boats_to_save_people(std::vector<int>& nums, int k);
 // #986
 std::vector<std::vector<int>> intersections_of_lists(std::vector<std::vector<int>>& A, std::vector<std::vector<int>>& B);
 
+// #167
+std::vector<int> two_sum_2(std::vector<int> nums, int k);
+
 #endif
