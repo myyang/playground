@@ -31,4 +31,7 @@ std::vector<std::vector<int>> intersections_of_lists(std::vector<std::vector<int
 // #167
 std::vector<int> two_sum_2(std::vector<int> nums, int k);
 
+// #15
+std::vector<std::vector<int>> three_sum(std::vector<int> nums, int k);
+
 #endif

@@ -228,3 +228,32 @@ std::vector<int> two_sum_2(std::vector<int> nums, int k)
 
     return res;
 }
+
+// #15
+std::vector<std::vector<int>> three_sum(std::vector<int> nums, int k)
+{
+    std::vector<std::vector<int>> res;
+
+    std::sort(nums.begin(), nums.end());
+
+    int n = nums.size();
+    for (int i = 0; i < n-2; ++i) // 1st impl n-2 is written as n-3
+    {
+        int l = i+1, r = n-1, t = k - nums[i];
+        while (l < r)
+        {
+            int s = nums[l] + nums[r];
+
+            if (s == t)
+            {
+                res.push_back({i, l++, r--});
+                while (l < r && nums[l] == nums[l-1]) ++l;
+                while (l < r && nums[r] == nums[r+1]) --r;
+            }
+            else if (s < t) ++l;  // 1st implementation t is written as k,
+            else --r;
+        }
+    }
+
+    return res;
+}

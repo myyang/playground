@@ -86,3 +86,16 @@ TEST(two_pointer, Q167_two_sum_2_tests)
     EXPECT_EQ (two_sum_2(nums1, 21), ans3);
 
 }
+
+TEST(two_pointer, Q15_three_sum_tests)
+{
+    std::vector<int> nums = {-5, -2, -1, -1, 0, 2, 7, 9, 11};
+    std::vector<std::vector<int>> ans1 = { {0, 1, 6}, {1, 4, 5}, {2, 3, 5} };
+    EXPECT_EQ (three_sum(nums, 0), ans1);
+
+    std::vector<std::vector<int>> ans2 = { {6, 7, 8} };
+    EXPECT_EQ (three_sum(nums, 27), ans2);
+
+    std::vector<std::vector<int>> ans3 = { {0, 1, 3} };
+    EXPECT_EQ (three_sum(nums, -8), ans3);
+}
