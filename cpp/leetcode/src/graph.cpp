@@ -30,3 +30,33 @@ int number_of_islands(std::vector<std::vector<int>>& nums)
 
     return ans;
 }
+
+// #547
+int find_circule_number(std::vector<std::vector<int>>& nums)
+{
+    int ans = 0;
+    if (nums.empty()) return ans;
+
+    int n = nums.size();
+
+    std::function<void(int)> dfs = [&](int cur)
+    {
+        // be careful this range
+        for (int i = 0; i < n; ++i)
+        {
+            if (!nums[cur][i]) continue;
+            nums[cur][i] = nums[i][cur] = 0;
+            dfs(i);
+        }
+    };
+
+    for (int i = 0; i < nums.size(); ++i)
+    {
+        if (!nums[i][i]) continue;
+        ++ans;
+        // pass start point is enough
+        dfs(i);
+    }
+
+    return ans;
+}
