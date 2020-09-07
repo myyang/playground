@@ -60,3 +60,26 @@ int find_circule_number(std::vector<std::vector<int>>& nums)
 
     return ans;
 }
+
+// #733
+std::vector<std::vector<int>>& flood_fill(std::vector<std::vector<int>>& nums, int sc, int sr, int new_color)
+{
+
+    // suppose nums is not empty;
+    int old_color = nums[sc][sr];
+    int m = nums.size(), n = nums[0].size();
+
+    std::function<void(int c, int r)> dfs = [&](int c, int r)
+    {
+        if (c < 0 || r < 0 || c >= m || r >= n || nums[c][r] != old_color) return;
+
+        nums[c][r] = new_color;
+        dfs(c-1, r);
+        dfs(c+1, r);
+        dfs(c, r-1);
+        dfs(c, r+1);
+    };
+
+    dfs(sc, sr);
+    return nums;
+}
