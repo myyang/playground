@@ -1,5 +1,8 @@
 #include <vector>
 #include <functional>
+#include <unordered_map>
+#include <algorithm>
+#include <set>
 
 
 // #200
@@ -82,4 +85,79 @@ std::vector<std::vector<int>>& flood_fill(std::vector<std::vector<int>>& nums, i
 
     dfs(sc, sr);
     return nums;
+}
+
+// #827
+int making_a_large_land(std::vector<std::vector<int>>& nums)
+{
+    int ans = 0;
+    if (nums.empty()) return ans;
+
+    int color = 1, m = nums.size(), n = nums[0].size();
+    std::unordered_map<int, int> areas;
+
+    std::function<void()> print_nums = [&](){
+        for (auto r: nums)
+        {
+            for (auto n: r) printf("%d ", n);
+            printf("\n");
+        }
+    };
+
+    std::function<void()> print_areas = [&](){
+        for (auto kv: areas)
+            printf("%d: %d\n", kv.first, kv.second);
+    };
+
+    // count land area and render
+    std::function<int(int, int)> count_area = [&](int i, int j)
+    {
+        if (i < 0 || j < 0 || i >= m || j >= n || nums[i][j] != 1) return 0;
+
+        nums[i][j] = color;
+        return 1 + count_area(i-1, j) + count_area(i+1, j) + count_area(i, j-1) + count_area(i, j+1);
+    };
+
+    for (int i = 0; i < m; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            ++color;
+            areas[color] = count_area(i, j);
+            // this comparsion is required to prevent no connect point works, (all lands, all sea)
+            // get max island directly.
+            ans = std::max(ans, areas[color]);
+        }
+    }
+    //print_nums();
+    //print_areas();
+
+    // try connect
+    std::function<int(int, int)> get_color = [&](int i, int j)
+    {
+        return (i < 0 || j < 0 || i >= m || j >= n) ? 0 : nums[i][j];
+    };
+    for (int i = 0; i < m; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            // be careful this condition
+            if (nums[i][j] == 0) {
+                int area = 1;
+                // vector doesn't works, check 2nd test render as follow:
+                // 2 2 0 5
+                // 0 0 5 5
+                // 10 0 0 5
+                // nums[0][2] would add island 5 twice.
+                // std::vector<int> colors =  {get_color(i-1, j), get_color(i+1, j), get_color(i, j-1), get_color(i, j+1)};
+                std::set<int> colors = {get_color(i-1, j), get_color(i+1, j), get_color(i, j-1), get_color(i, j+1)};
+                for (int c: colors)
+                {
+                    area += areas[c];
+                }
+                ans = std::max(ans, area);
+            }
+        }
+    }
+    return ans;
 }

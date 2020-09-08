@@ -81,3 +81,32 @@ TEST(graph, Q733_flood_fill_tests)
     };
     EXPECT_EQ (flood_fill(img3, 1, 2, 4), img4);
 }
+
+TEST(graph, Q827_making_a_large_land_tests)
+{
+    std::vector<std::vector<int>> map1 = {
+        {1, 0, 0, 1},
+        {0, 0, 1, 1},
+        {1, 0, 0, 1},
+    };
+    EXPECT_EQ (making_a_large_land(map1), 5);
+
+    std::vector<std::vector<int>> map2 = {
+        {1, 1, 0, 1},
+        {0, 0, 1, 1},
+        {1, 0, 0, 1},
+    };
+    EXPECT_EQ (making_a_large_land(map2), 7);
+
+    std::vector<std::vector<int>> map3 = {
+        {1, 1},
+        {1, 1},
+    };
+    EXPECT_EQ (making_a_large_land(map3), 4);
+
+    std::vector<std::vector<int>> map4 = {
+        {0, 0},
+        {0, 0},
+    };
+    EXPECT_EQ (making_a_large_land(map4), 1);
+}
