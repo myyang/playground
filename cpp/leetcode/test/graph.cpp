@@ -185,3 +185,16 @@ TEST(graph, Q210_can_finish_course_order_tests)
     std::vector<int> ans3 = {3, 2, 1, 0};
     EXPECT_EQ (can_finish_course_order(4, graph3), ans3);
 }
+
+TEST(graph, Q1202_swap_to_smallest_string_tests)
+{
+    std::vector<std::vector<int>> pairs1 = {
+        {0, 3}, {1, 2}
+    };
+    EXPECT_EQ(swap_to_smallest_string("dcab", pairs1), "bacd");
+
+    std::vector<std::vector<int>> pairs2 = {
+         {0, 3}, {0, 2}, {1, 2},
+    };
+    EXPECT_EQ(swap_to_smallest_string("dcab", pairs2), "abcd");
+}

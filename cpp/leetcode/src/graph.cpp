@@ -5,6 +5,8 @@
 #include <set>
 #include <queue>
 #include <tuple>
+#include <string>
+#include <numeric>
 
 
 // #200
@@ -295,4 +297,58 @@ std::vector<int> can_finish_course_order(int courseNum, std::vector<std::vector<
     std::reverse(ans.begin(), ans.end());
 
     return ans;
+}
+
+// #1202
+std::string swap_to_smallest_string(std::string s, std::vector<std::vector<int>>& pairs)
+{
+    if (s.empty() || pairs.empty()) return s;
+
+    int n = s.length();
+    std::vector<int> group(n, 0);
+
+    for (int i = 0; i < n; ++i)
+        group[i] = i;
+
+    std::function<int(int)> find = [&](int i)
+    {
+        if (group[i] != i)
+            group[i] = find(group[i]);
+        return group[i];
+        // union find oneline
+        //return group[i] == i ? i : group[i] == find(group[i]);
+    };
+
+    for (auto pair: pairs)
+    {
+        // first find funcion is correct
+        group[find(pair[0])] = find(pair[1]);
+        //group[pair[0]] = find(pair[1]);
+    }
+
+	/*
+	printf("group: ");
+	for (int i = 0; i < n; ++i) printf("%d ", group[i]);
+	printf("\n");
+	*/
+
+    std::vector<std::vector<char>> chars(n);
+    std::vector<std::vector<int>> idxs(n);
+
+    for (int i = 0; i < n; ++i)
+    {
+		// XXX: get id with find is important
+		int id = find(i);
+        chars[id].push_back(s[i]);
+        idxs[id].push_back(i);
+    }
+
+    for (int i = 0; i < n; ++i)
+    {
+        std::sort(chars[i].begin(), chars[i].end());
+        for (int j = 0; j < idxs[i].size(); ++j)
+            s[idxs[i][j]] = chars[i][j];
+    }
+
+    return s;
 }

@@ -2,6 +2,7 @@
 #define LEETCODE_GRAPH_H
 
 #include <vector>
+#include <string>
 
 // #200
 int number_of_islands(std::vector<std::vector<int>>& nums);
@@ -26,5 +27,8 @@ bool can_finish_course(int courseNum, std::vector<std::vector<int>>& nums);
 
 // #210
 std::vector<int> can_finish_course_order(int courseNum, std::vector<std::vector<int>>& nums);
+
+// #1202
+std::string swap_to_smallest_string(std::string s, std::vector<std::vector<int>>& nums);
 
 #endif
