@@ -207,3 +207,23 @@ int as_far_as_possible_from_land(std::vector<std::vector<int>>& nums)
 
     return ans;
 }
+
+// #841
+bool keys_and_rooms(std::vector<std::vector<int>>& nums)
+{
+    if (nums.empty()) return false;
+
+    std::set<int> visited;
+
+    std::function<void(int)> dfs = [&](int i)
+    {
+        if (visited.count(i)) return;
+
+        visited.emplace(i);
+
+        for (auto n: nums[i]) dfs(n);
+    };
+
+    dfs(0);
+    return visited.size() == nums.size();
+}

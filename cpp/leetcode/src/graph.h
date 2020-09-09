@@ -16,4 +16,7 @@ int making_a_large_land(std::vector<std::vector<int>>& nums);
 // #1162
 int as_far_as_possible_from_land(std::vector<std::vector<int>>& nums);
 
+// #841
+bool keys_and_rooms(std::vector<std::vector<int>>& nums);
+
 #endif

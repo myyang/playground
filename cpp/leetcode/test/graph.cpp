@@ -140,3 +140,14 @@ TEST(graph, Q1162_as_far_as_possible_from_land)
     };
     EXPECT_EQ (as_far_as_possible_from_land(map4), -1);
 }
+
+TEST(graph, Q841_keys_and_rooms)
+{
+    std::vector<std::vector<int>> keys1 = { {1}, {2}, {3}, {} };
+    EXPECT_EQ (keys_and_rooms(keys1), true);
+
+    std::vector<std::vector<int>> keys2 = {
+        {1, 3}, {0, 3, 1}, {2}, {0},
+    };
+    EXPECT_EQ (keys_and_rooms(keys2), false);
+}
