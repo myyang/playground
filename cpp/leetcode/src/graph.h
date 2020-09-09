@@ -24,4 +24,7 @@ bool keys_and_rooms(std::vector<std::vector<int>>& nums);
 // #207
 bool can_finish_course(int courseNum, std::vector<std::vector<int>>& nums);
 
+// #210
+std::vector<int> can_finish_course_order(int courseNum, std::vector<std::vector<int>>& nums);
+
 #endif

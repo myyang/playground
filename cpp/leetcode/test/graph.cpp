@@ -164,3 +164,24 @@ TEST(graph, Q207_can_finish_course_tests)
     };
     EXPECT_EQ (can_finish_course(8, graph2), false);
 }
+
+TEST(graph, Q210_can_finish_course_order_tests)
+{
+    std::vector<std::vector<int>> graph1 = {
+        {0, 1}, {0, 7}, {7, 1}, {5, 0}, {4, 6}, {6, 2},
+    };
+    std::vector<int> ans1 = {5, 4, 6, 3, 2, 0, 7, 1};
+    EXPECT_EQ (can_finish_course_order(8, graph1), ans1);
+
+    std::vector<std::vector<int>> graph2 = {
+        {0, 1}, {0, 7}, {7, 1}, {5, 0}, {4, 6}, {6, 2}, {1, 5},
+    };
+    std::vector<int> ans2 = {};
+    EXPECT_EQ (can_finish_course_order(8, graph2), ans2);
+
+    std::vector<std::vector<int>> graph3 = {
+        {1, 0}, {2, 0}, {3, 1}, {2, 1},
+    };
+    std::vector<int> ans3 = {3, 2, 1, 0};
+    EXPECT_EQ (can_finish_course_order(4, graph3), ans3);
+}

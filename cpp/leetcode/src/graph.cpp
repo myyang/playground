@@ -261,3 +261,38 @@ bool can_finish_course(int courseNum, std::vector<std::vector<int>>& nums)
 
     return true;
 }
+
+// #210
+std::vector<int> can_finish_course_order(int courseNum, std::vector<std::vector<int>>& nums)
+{
+    if (courseNum <= 0) return {};
+
+    std::vector<std::vector<int>> graph(courseNum);
+    for (auto num: nums)
+        graph[num[0]].push_back(num[1]);
+
+    // state: 0 = not_visit, 1 = visting, 2 = visited
+    std::vector<int> visit(courseNum);
+    std::vector<int> ans;
+
+    std::function<bool(int)> cycle = [&](int course)
+    {
+        if (visit[course] == 1) return true;
+        if (visit[course] == 2) return false;
+
+        visit[course] = 1;
+        for (auto i: graph[course])
+            if (cycle(i)) return true;
+
+        visit[course] = 2;
+        ans.push_back(course);
+        return false;
+    };
+
+    for (int i = 0; i < courseNum; ++i)
+        if (cycle(i)) return {};
+
+    std::reverse(ans.begin(), ans.end());
+
+    return ans;
+}
