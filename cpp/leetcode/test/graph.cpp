@@ -110,3 +110,33 @@ TEST(graph, Q827_making_a_large_land_tests)
     };
     EXPECT_EQ (making_a_large_land(map4), 1);
 }
+
+TEST(graph, Q1162_as_far_as_possible_from_land)
+{
+
+    std::vector<std::vector<int>> map1 = {
+        {1, 0, 1},
+        {0, 0, 0},
+        {1, 0, 1},
+    };
+    EXPECT_EQ (as_far_as_possible_from_land(map1), 2);
+
+    std::vector<std::vector<int>> map2 = {
+        {1, 0, 0},
+        {0, 0, 0},
+        {0, 0, 0},
+    };
+    EXPECT_EQ (as_far_as_possible_from_land(map2), 4);
+
+    std::vector<std::vector<int>> map3 = {
+        {1, 1},
+        {1, 1},
+    };
+    EXPECT_EQ (as_far_as_possible_from_land(map3), -1);
+
+    std::vector<std::vector<int>> map4 = {
+        {0, 0},
+        {0, 0},
+    };
+    EXPECT_EQ (as_far_as_possible_from_land(map4), -1);
+}

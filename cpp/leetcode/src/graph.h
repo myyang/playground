@@ -13,4 +13,7 @@ std::vector<std::vector<int>>& flood_fill(std::vector<std::vector<int>>& nums, i
 // #827
 int making_a_large_land(std::vector<std::vector<int>>& nums);
 
+// #1162
+int as_far_as_possible_from_land(std::vector<std::vector<int>>& nums);
+
 #endif

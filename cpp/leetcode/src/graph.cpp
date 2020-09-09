@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <algorithm>
 #include <set>
+#include <queue>
+#include <tuple>
 
 
 // #200
@@ -159,5 +161,49 @@ int making_a_large_land(std::vector<std::vector<int>>& nums)
             }
         }
     }
+    return ans;
+}
+
+// #1162
+int as_far_as_possible_from_land(std::vector<std::vector<int>>& nums)
+{
+    int ans = -1;
+    if (nums.empty()) return ans;
+
+    int m = nums.size(), n = nums[0].size();
+
+    std::queue<std::tuple<int, int, int>> walks;
+    // visited matrix is required to prevent still re visited.
+    std::vector<std::vector<bool>> visited(m, std::vector(n, false));
+
+
+    // insert land
+    for (int i = 0; i < m; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            if (nums[i][j] == 1) walks.emplace(std::make_tuple(i, j, 0));
+        }
+    }
+
+    // search with bfs
+    while (walks.size())
+    {
+        int i, j, walk;
+        std::tie(i, j , walk) = walks.front();
+        walks.pop();
+
+        if (i < 0 || j < 0 || i >= m || j >= n || visited[i][j]) continue;
+
+        visited[i][j] = true;
+
+        if (nums[i][j] == 0) ans = std::max(ans, walk);
+
+        walks.emplace(std::make_tuple(i-1, j, walk+1));
+        walks.emplace(std::make_tuple(i+1, j, walk+1));
+        walks.emplace(std::make_tuple(i, j-1, walk+1));
+        walks.emplace(std::make_tuple(i, j+1, walk+1));
+    }
+
     return ans;
 }
