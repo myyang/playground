@@ -1,6 +1,8 @@
 #ifndef LEETCODE_GRAPH_H
 #define LEETCODE_GRAPH_H
 
+#include <vector>
+
 // #200
 int number_of_islands(std::vector<std::vector<int>>& nums);
 
@@ -18,5 +20,8 @@ int as_far_as_possible_from_land(std::vector<std::vector<int>>& nums);
 
 // #841
 bool keys_and_rooms(std::vector<std::vector<int>>& nums);
+
+// #207
+bool can_finish_course(int courseNum, std::vector<std::vector<int>>& nums);
 
 #endif

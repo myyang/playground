@@ -227,3 +227,37 @@ bool keys_and_rooms(std::vector<std::vector<int>>& nums)
     dfs(0);
     return visited.size() == nums.size();
 }
+
+// #207
+bool can_finish_course(int courseNum, std::vector<std::vector<int>>& nums)
+{
+    if (courseNum <= 0) return false;
+
+    // build graph
+    std::vector<std::vector<int>> graph(courseNum); // NOTE this graph init way
+    for (auto num: nums)
+        graph[num[0]].push_back(num[1]);
+
+    // state: 0 = not_visit, 1 = visting, 2 = visited
+    std::vector<int> visit(courseNum, 0);
+
+    std::function<bool(int)> cycle = [&](int course)
+    {
+        if (visit[course] == 1) return true;
+        if (visit[course] == 2) return false;
+
+        visit[course] = 1;
+
+        // be careful this for loop cycle graph retrieve
+        for (auto n: graph[course])
+            if (cycle(n)) return true;
+
+        visit[course] = 2;
+        return false;
+    };
+
+    for (int i = 0; i < courseNum; ++i)
+        if (cycle(i)) return false;
+
+    return true;
+}

@@ -151,3 +151,16 @@ TEST(graph, Q841_keys_and_rooms)
     };
     EXPECT_EQ (keys_and_rooms(keys2), false);
 }
+
+TEST(graph, Q207_can_finish_course_tests)
+{
+    std::vector<std::vector<int>> graph1 = {
+        {0, 1}, {0, 7}, {7, 1}, {5, 0}, {4, 6}, {6, 2},
+    };
+    EXPECT_EQ (can_finish_course(8, graph1), true);
+
+    std::vector<std::vector<int>> graph2 = {
+        {0, 1}, {0, 7}, {7, 1}, {5, 0}, {4, 6}, {6, 2}, {1, 5},
+    };
+    EXPECT_EQ (can_finish_course(8, graph2), false);
+}
