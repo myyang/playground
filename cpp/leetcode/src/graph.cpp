@@ -7,6 +7,8 @@
 #include <tuple>
 #include <string>
 #include <numeric>
+#include <string>
+#include <unordered_set>
 
 
 // #200
@@ -351,4 +353,52 @@ std::string swap_to_smallest_string(std::string s, std::vector<std::vector<int>>
     }
 
     return s;
+}
+
+// #399
+std::vector<double> calcEq_dfs(
+        std::vector<std::vector<std::string>> eqs,
+        std::vector<double>& values,
+        std::vector<std::vector<std::string>> queries)
+{
+    std::unordered_map<std::string, std::unordered_map<std::string, double>> g;
+    for (int i = 0; i < eqs.size(); ++i)
+    {
+        std::string a = eqs[i][0], b = eqs[i][1];
+        double k = values[i];
+        g[a][b] = k;
+        g[b][a] = 1.0 / k;
+    }
+
+    std::function<double(std::string, std::string, std::unordered_set<std::string>&)> divide = [&](
+            std::string a, std::string b, std::unordered_set<std::string>& visited)
+                {
+                    if (a == b) return 1.0;
+                    visited.emplace(a);
+
+                    for (auto pair: g[a])
+                    {
+                        std::string c = pair.first;
+                        if (visited.count(c)) continue;
+                        double d = divide(c, b, visited);
+                        if (d > 0) return d * g[a][c];
+                    }
+                    return -1.0;
+                };
+
+    std::vector<double> res;
+    for (int i = 0; i < queries.size(); ++i)
+    {
+        std::string x = queries[i][0], y = queries[i][1];
+        if (!g.count(x) || !g.count(y))
+        {
+            res.push_back(-1.0);
+            continue;
+        }
+
+        std::unordered_set<std::string> visited;
+        res.push_back(divide(x, y, visited));
+    }
+
+    return res;
 }

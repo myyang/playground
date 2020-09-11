@@ -31,4 +31,10 @@ std::vector<int> can_finish_course_order(int courseNum, std::vector<std::vector<
 // #1202
 std::string swap_to_smallest_string(std::string s, std::vector<std::vector<int>>& nums);
 
+// #399
+std::vector<double> calcEq_dfs(
+        std::vector<std::vector<std::string>> eqs,
+        std::vector<double>& values,
+        std::vector<std::vector<std::string>> queries);
+
 #endif

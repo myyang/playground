@@ -198,3 +198,16 @@ TEST(graph, Q1202_swap_to_smallest_string_tests)
     };
     EXPECT_EQ(swap_to_smallest_string("dcab", pairs2), "abcd");
 }
+
+TEST(graph, Q399_calcEq_dfs_tests)
+{
+    std::vector<std::vector<std::string>> eqs1 = {
+        {"a", "b"}, {"b", "c"}
+    };
+    std::vector<double> values1 = {2.0, 3.0};
+    std::vector<std::vector<std::string>> queries1 = {
+        {"a", "c"}, {"b", "a"}, {"a", "e"}, {"a", "a"}, {"x", "x"}
+    };
+    std::vector<double> ans1 = {6.0, 0.5, -1.0, 1.0, -1.0};
+    EXPECT_EQ (calcEq_dfs(eqs1, values1, queries1), ans1);
+}
