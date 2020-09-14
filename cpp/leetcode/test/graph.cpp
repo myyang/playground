@@ -220,3 +220,33 @@ TEST(graph, Q802_find_final_state_nodes_tests)
     std::vector<int> ans1 = {2, 4, 5, 6};
     EXPECT_EQ (find_final_state_nodes(graph1), ans1);
 }
+
+TEST(graph, Q684_redundant_connection_dfs_tests)
+{
+    std::vector<std::vector<int>> edges1 = {
+        {1,2}, {1,3}, {2,3}
+    };
+    std::vector<int> ans1 = {2,3};
+    EXPECT_EQ (redundant_connection_dfs(edges1), ans1);
+
+    std::vector<std::vector<int>> edges2 = {
+        {1,2}, {2,3}, {3,4}, {1,4}, {1,5}
+    };
+    std::vector<int> ans2 = {1,4};
+    EXPECT_EQ (redundant_connection_dfs(edges2), ans2);
+}
+
+TEST(graph, Q684_redundant_connection_union_find_tests)
+{
+    std::vector<std::vector<int>> edges1 = {
+        {1,2}, {1,3}, {2,3}
+    };
+    std::vector<int> ans1 = {2,3};
+    EXPECT_EQ (redundant_connection_union_find(edges1), ans1);
+
+    std::vector<std::vector<int>> edges2 = {
+        {1,2}, {2,3}, {3,4}, {1,4}, {1,5}
+    };
+    std::vector<int> ans2 = {1,4};
+    EXPECT_EQ (redundant_connection_union_find(edges2), ans2);
+}

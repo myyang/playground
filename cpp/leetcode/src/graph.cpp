@@ -432,3 +432,78 @@ std::vector<int> find_final_state_nodes(std::vector<std::vector<int>>& graph)
     }
     return res;
 }
+
+// #684
+std::vector<int> redundant_connection_dfs(std::vector<std::vector<int>>& edges)
+{
+    std::vector<int> res;
+    if (edges.empty()) return res;
+
+    std::unordered_map<int, std::vector<int>> g;
+
+    std::function<bool(int, int, std::unordered_set<int>&)> cycle = [&](int from ,int to, std::unordered_set<int>& visited)
+    {
+        if (from == to) return true;
+        if (!g.count(from) || !g.count(to)) return false;
+        visited.emplace(from);
+        for (int tt: g.at(from))
+        {
+            if (visited.count(tt)) continue;
+            if (cycle(tt, to, visited)) return true;
+        }
+        return false;
+    };
+
+    for (std::vector<int> e: edges)
+    {
+        int from = e[0], to = e[1];
+
+        std::unordered_set<int> visited;
+        if (cycle(from, to, visited)) return e;
+
+        g[from].push_back(to);
+        g[to].push_back(from);
+    }
+
+    return res;
+}
+
+// #684
+std::vector<int> redundant_connection_union_find(std::vector<std::vector<int>>& edges)
+{
+    std::vector<int> res;
+    if (edges.empty()) return res;
+
+    int n = edges.size();
+    // vertex start from 1 and be careful init value.
+    std::vector<int> parents(n+1, 0);
+    std::vector<int> sizes(n+1, 1);
+
+    std::function<int(int)> find = [&](int i) {
+        // union find with path compression
+        while (parents[i] != i)
+        {
+            parents[i] = parents[parents[i]];
+            i = parents[i];
+        }
+        return i;
+    };
+
+    for (std::vector<int> edge: edges)
+    {
+        int from = edge[0], to = edge[1];
+        // init parents here
+        if (parents[from] == 0) parents[from] = from;
+        if (parents[to] == 0) parents[to] = to;
+
+        int pf = find(from), pt = find(to);
+        if (pf == pt) return edge;
+
+        // union two point/tree, join smaller to bigger one
+        if (sizes[to] > sizes[from]) std::swap(from, to);
+        parents[to] = parents[from];
+        sizes[from] += sizes[to];
+    }
+
+    return res;
+}

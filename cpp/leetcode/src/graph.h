@@ -40,4 +40,8 @@ std::vector<double> calcEq_dfs(
 // #802
 std::vector<int> find_final_state_nodes(std::vector<std::vector<int>>& graph);
 
+// #684
+std::vector<int> redundant_connection_dfs(std::vector<std::vector<int>>& edges);
+std::vector<int> redundant_connection_union_find(std::vector<std::vector<int>>& edges);
+
 #endif
