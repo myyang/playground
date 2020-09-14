@@ -507,3 +507,69 @@ std::vector<int> redundant_connection_union_find(std::vector<std::vector<int>>& 
 
     return res;
 }
+
+// #685
+std::vector<int> redundant_connection_2_union_find(std::vector<std::vector<int>>& edges)
+{
+    if (edges.empty()) return {};
+
+    int n = edges.size();
+    std::vector<int> parents(n+1, 0);
+    std::vector<int> roots(n+1, 0);
+    std::vector<int> sizes(n+1, 1);
+
+    std::vector<int> ans1;
+    std::vector<int> ans2;
+
+    // case1 cycle
+    // case2 two parents, return the first edge
+
+    for (auto& edge: edges)
+    {
+        int from = edge[0], to = edge[1];
+
+        // two parente case
+        if (parents[to] > 0) {
+            ans1 = {parents[to], to};  // get previous edge
+            ans2 = edge;
+
+            // temp delete second edge
+            edge[0] = edge[1] = -1;
+        }
+
+        parents[from] = to;
+    }
+
+    std::function<int(int)> find = [&](int i)
+    {
+        while (roots[i] != i)
+        {
+            roots[i] = roots[roots[i]];
+            i = roots[i];
+        }
+        return i;
+    };
+
+    for (auto& edge: edges)
+    {
+        int from = edge[0], to = edge[1];
+
+        // the deleted edge
+        if (from < 0 || to < 0) continue;
+
+        // init union find
+        if (roots[from] == 0) roots[from] = from;
+        if (roots[to] == 0) roots[to] = to;
+
+        int pf = find(from), pt = find(to);
+
+        if (pf == pt) return (ans1.empty()) ? edge : ans1;
+
+        if (sizes[to] > sizes[from]) std::swap(from, to);
+        roots[to] = from;
+        sizes[from] += sizes[to];
+
+    }
+
+    return ans2;
+}
