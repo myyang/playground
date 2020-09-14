@@ -37,4 +37,7 @@ std::vector<double> calcEq_dfs(
         std::vector<double>& values,
         std::vector<std::vector<std::string>> queries);
 
+// #802
+std::vector<int> find_final_state_nodes(std::vector<std::vector<int>>& graph);
+
 #endif

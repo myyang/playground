@@ -402,3 +402,33 @@ std::vector<double> calcEq_dfs(
 
     return res;
 }
+
+std::vector<int> find_final_state_nodes(std::vector<std::vector<int>>& graph)
+{
+    std::vector<int> res;
+    if (graph.empty()) return res;
+
+    enum State {UNKNOWN, VISITING, SAFE, UNSAFE};
+
+    std::vector<State> states(graph.size(), UNKNOWN);
+
+    std::function<State(int)> dfs = [&](int i)
+    {
+        if (states[i] == VISITING) return states[i] = UNSAFE;
+        if (states[i] != UNKNOWN) return states[i];
+
+        states[i] = VISITING;
+        for (int j = 0; j < graph[i].size(); ++j)
+        {
+            if (dfs(graph[i][j]) == UNSAFE) return states[i] = UNSAFE;
+        }
+
+        return states[i] = SAFE;
+    };
+
+    for (int i = 0; i < graph.size(); ++i)
+    {
+        if (dfs(i) == SAFE) res.push_back(i);
+    }
+    return res;
+}

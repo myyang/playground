@@ -211,3 +211,12 @@ TEST(graph, Q399_calcEq_dfs_tests)
     std::vector<double> ans1 = {6.0, 0.5, -1.0, 1.0, -1.0};
     EXPECT_EQ (calcEq_dfs(eqs1, values1, queries1), ans1);
 }
+
+TEST(graph, Q802_find_final_state_nodes_tests)
+{
+    std::vector<std::vector<int>> graph1 = {
+        {1,2}, {2,3}, {5}, {0}, {5}, {}, {},
+    };
+    std::vector<int> ans1 = {2, 4, 5, 6};
+    EXPECT_EQ (find_final_state_nodes(graph1), ans1);
+}
