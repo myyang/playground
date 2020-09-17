@@ -283,3 +283,12 @@ TEST(graph, Q886_possible_bipartition_tests)
     std::vector<std::vector<int>> dislikes2 = {{0,1}, {0,2}, {1,2}};
     EXPECT_EQ (possible_bipartition(3, dislikes2), false);
 }
+
+TEST(graph, Q886_possible_bipartition_bfs_tests)
+{
+    std::vector<std::vector<int>> dislikes1 = {{0,1}, {0,2}, {1,3}};
+    EXPECT_EQ (possible_bipartition_bfs(4, dislikes1), true);
+
+    std::vector<std::vector<int>> dislikes2 = {{0,1}, {0,2}, {1,2}};
+    EXPECT_EQ (possible_bipartition_bfs(3, dislikes2), false);
+}

@@ -640,3 +640,37 @@ bool possible_bipartition(int n, std::vector<std::vector<int>>& dislikes)
 
     return true;
 }
+
+// #886
+bool possible_bipartition_bfs(int n, std::vector<std::vector<int>>& dislikes)
+{
+    std::vector<std::vector<int>> graph(n);
+    for (std::vector<int> p: dislikes)
+    {
+        graph[p[0]].push_back(p[1]);
+        graph[p[1]].push_back(p[0]);
+    }
+
+    std::queue<int> q;
+    std::vector<int> colors(n);
+    for (int i = 0; i < n; ++i)
+    {
+        if (colors[i]) continue;
+
+        q.push(i);
+        colors[i] = 1;
+        while (!q.empty())
+        {
+            int cur = q.front();
+            q.pop();
+            for (int i: graph[cur])
+            {
+                if (colors[i] == colors[cur]) return false;
+                if (colors[i]) continue;
+                colors[i] = -colors[cur];
+                q.push(i);
+            }
+        }
+    }
+    return true;
+}

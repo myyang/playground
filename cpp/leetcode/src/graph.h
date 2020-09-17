@@ -52,5 +52,6 @@ bool is_graph_bipartite(std::vector<std::vector<int>>& graph);
 
 // #886
 bool possible_bipartition(int n, std::vector<std::vector<int>>& dislikes);
+bool possible_bipartition_bfs(int n, std::vector<std::vector<int>>& dislikes);
 
 #endif
