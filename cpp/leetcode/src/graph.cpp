@@ -573,3 +573,34 @@ std::vector<int> redundant_connection_2_union_find(std::vector<std::vector<int>>
 
     return ans2;
 }
+
+// #785
+bool is_graph_bipartite(std::vector<std::vector<int>>& graph)
+{
+    if (graph.empty()) return true;
+
+    int n = graph.size();
+    std::vector<int> colors(n);
+
+    std::function<bool(int, int)> dfs = [&](int node, int color)
+    {
+        if (colors[node]) return colors[node] == color;
+
+        // this assignment is required.
+        colors[node] = color;
+        for (int i: graph[node])
+        {
+            // don't have check colors, the first cond checked
+            if (!dfs(i, -color)) return false;
+        }
+
+        return true;
+    };
+
+    for (int i = 0; i < n; ++i)
+    {
+        if (!colors[i] && !dfs(i, 1)) return false;
+    }
+
+    return true;
+}

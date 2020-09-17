@@ -265,3 +265,12 @@ TEST(graph, Q685_redundant_connection_2_union_find_tests)
     std::vector<int> ans2 = {4,1};
     EXPECT_EQ (redundant_connection_2_union_find(edges2), ans2);
 }
+
+TEST(graph, Q785_is_graph_bipartite_tests)
+{
+    std::vector<std::vector<int>> graph1 = {{1,3}, {0,2}, {1,3}, {0,2}};
+    EXPECT_EQ (is_graph_bipartite(graph1), true);
+
+    std::vector<std::vector<int>> graph2 = {{1,2,3}, {0,2}, {0,1,3}, {0,2}};
+    EXPECT_EQ (is_graph_bipartite(graph2), false);
+}

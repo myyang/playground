@@ -47,4 +47,7 @@ std::vector<int> redundant_connection_union_find(std::vector<std::vector<int>>& 
 // #685
 std::vector<int> redundant_connection_2_union_find(std::vector<std::vector<int>>& edges);
 
+// #785
+bool is_graph_bipartite(std::vector<std::vector<int>>& graph);
+
 #endif
