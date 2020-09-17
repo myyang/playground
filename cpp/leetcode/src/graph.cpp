@@ -604,3 +604,39 @@ bool is_graph_bipartite(std::vector<std::vector<int>>& graph)
 
     return true;
 }
+
+// #886
+bool possible_bipartition(int n, std::vector<std::vector<int>>& dislikes)
+{
+    // the first implementation doesn't build graph
+    // this bidirection graph is required to coloring
+    std::vector<std::vector<int>> graph(n);
+    for (std::vector<int> p: dislikes)
+    {
+        graph[p[0]].push_back(p[1]);
+        graph[p[1]].push_back(p[0]);
+    }
+
+    std::vector<int> colors(n);
+
+    std::function<bool(int, int)> dfs = [&](int node, int color)
+    {
+        if (colors[node]) return colors[node] == color;
+
+        colors[node] = color;
+        // don't use dislikes directly
+        //for (int i: dislikes[node])
+        for (int i: graph[node])
+        {
+            if (!dfs(i, -color)) return false;
+        }
+        return true;
+    };
+
+    for (int i = 0; i < n; ++i)
+    {
+        if (!colors[i] && !dfs(i, 1)) return false;
+    }
+
+    return true;
+}

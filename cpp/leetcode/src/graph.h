@@ -50,4 +50,7 @@ std::vector<int> redundant_connection_2_union_find(std::vector<std::vector<int>>
 // #785
 bool is_graph_bipartite(std::vector<std::vector<int>>& graph);
 
+// #886
+bool possible_bipartition(int n, std::vector<std::vector<int>>& dislikes);
+
 #endif
