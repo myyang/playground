@@ -292,3 +292,15 @@ TEST(graph, Q886_possible_bipartition_bfs_tests)
     std::vector<std::vector<int>> dislikes2 = {{0,1}, {0,2}, {1,2}};
     EXPECT_EQ (possible_bipartition_bfs(3, dislikes2), false);
 }
+
+TEST(graph, Q443_minimum_genetic_mutation_tests)
+{
+    std::vector<std::string> bank1 = {"AACCGGTA"};
+    EXPECT_EQ (minimum_genetic_mutation("AACCGGTT", "AACCGGTA", bank1), 1);
+
+    std::vector<std::string> bank2 = {"AACCGGTA", "AACCGCTA", "AAACGGTA"};
+    EXPECT_EQ (minimum_genetic_mutation("AACCGGTT", "AAACGGTA", bank2), 2);
+
+    std::vector<std::string> bank3 = {"AAAACCCC", "AAACCCCC", "AACCCCCC"};
+    EXPECT_EQ (minimum_genetic_mutation("AAAAACCC", "AACCCCCC", bank3), 3);
+}

@@ -674,3 +674,49 @@ bool possible_bipartition_bfs(int n, std::vector<std::vector<int>>& dislikes)
     }
     return true;
 }
+
+// #443
+int minimum_genetic_mutation(
+        std::string start,
+        std::string end,
+        std::vector<std::string>& bank)
+{
+    std::queue<std::string> q;
+    q.push(start);
+
+    std::unordered_set<std::string> visited;
+    visited.emplace(start);
+
+    int step = 0;
+
+    std::function<bool(std::string, std::string)> validMutation = [&](std::string v1, std::string v2)
+    {
+        // suppose mutation: v1 and v2 has same length
+        int mutations = 0;
+        for (int i = 0; i < v1.size(); ++i)
+            mutations += v1[i] != v2[i];  // this != should be noticed
+        return mutations == 1;
+    };
+
+    while (!q.empty())
+    {
+        int size = q.size();
+        for (; size > 0; --size)
+        {
+            std::string cur = std::move(q.front());
+            q.pop();
+
+            if (cur == end) return step;
+            // iterate through bank for validate
+            for (const std::string &possible: bank)
+            {
+                if (visited.count(possible) || !validMutation(cur, possible)) continue;
+                visited.insert(possible);
+                q.push(possible);
+            }
+        }
+        ++step;
+    }
+
+    return -1;
+}

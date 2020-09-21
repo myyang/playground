@@ -54,4 +54,7 @@ bool is_graph_bipartite(std::vector<std::vector<int>>& graph);
 bool possible_bipartition(int n, std::vector<std::vector<int>>& dislikes);
 bool possible_bipartition_bfs(int n, std::vector<std::vector<int>>& dislikes);
 
+// #443
+int minimum_genetic_mutation(std::string start, std::string end, std::vector<std::string>& bank);
+
 #endif
