@@ -304,3 +304,16 @@ TEST(graph, Q443_minimum_genetic_mutation_tests)
     std::vector<std::string> bank3 = {"AAAACCCC", "AAACCCCC", "AACCCCCC"};
     EXPECT_EQ (minimum_genetic_mutation("AAAAACCC", "AACCCCCC", bank3), 3);
 }
+
+TEST(graph, Q815_min_bus_to_destination_tests)
+{
+    std::vector<std::vector<int>> routers1 = {{1,2,7}, {3,6,7}, {4,5,6}};
+    EXPECT_EQ (min_bus_to_destination(routers1, 1, 3), 2);
+    EXPECT_EQ (min_bus_to_destination(routers1, 1, 7), 1);
+    EXPECT_EQ (min_bus_to_destination(routers1, 1, 5), 3);
+    EXPECT_EQ (min_bus_to_destination(routers1, 1, 8), -1);
+
+    std::vector<std::vector<int>> routers2 = {{1,2,7}, {3,6,7}, {1,3,7}};
+    EXPECT_EQ (min_bus_to_destination(routers2, 1, 3), 1);
+    EXPECT_EQ (min_bus_to_destination(routers2, 1, 7), 1);
+}

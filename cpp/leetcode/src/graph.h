@@ -57,4 +57,7 @@ bool possible_bipartition_bfs(int n, std::vector<std::vector<int>>& dislikes);
 // #443
 int minimum_genetic_mutation(std::string start, std::string end, std::vector<std::string>& bank);
 
+// #815
+int min_bus_to_destination(std::vector<std::vector<int>> &routers, int src, int tgr);
+
 #endif

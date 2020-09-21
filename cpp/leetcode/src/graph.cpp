@@ -720,3 +720,41 @@ int minimum_genetic_mutation(
 
     return -1;
 }
+
+// #815
+int min_bus_to_destination(std::vector<std::vector<int>>& routers, int src, int tgr)
+{
+    if (src == tgr) return 0;
+
+    std::unordered_map<int, std::vector<int>> graph;
+    for (int i = 0; i < routers.size(); ++i)
+        for (const int stop: routers[i])
+            graph[stop].push_back(i);
+
+    std::vector<int> visited(routers.size(), 0);
+    std::queue<int> q;
+    q.push(src);
+    int step = 0;
+
+    while (!q.empty())
+    {
+        int size = q.size();
+        ++step;
+        for (; size > 0; --size)
+        {
+            int cur = q.front();
+            q.pop();
+            for (const int bus: graph[cur])
+            {
+                if (visited[bus]) continue;
+                visited[bus] = 1;
+                for (const int t: routers[bus])
+                {
+                    if (t == tgr) return step;
+                    q.push(t);
+                }
+            }
+        }
+    }
+    return -1;
+}
