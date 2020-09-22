@@ -317,3 +317,13 @@ TEST(graph, Q815_min_bus_to_destination_tests)
     EXPECT_EQ (min_bus_to_destination(routers2, 1, 3), 1);
     EXPECT_EQ (min_bus_to_destination(routers2, 1, 7), 1);
 }
+
+//TEST(graph, Q1129_shortest_alternating_path_tests)
+//{
+//    int n = 3;
+//    std::vector<std::vector<int>> red_edges1 = {{0,1}, {1,2}};
+//    std::vector<std::vector<int>> blue_edges1 = {};
+//    std::vector<int> res1 = {0,1,-1};
+//    EXPECT_EQ (shortest_alternating_path(n, red_edges1, blue_edges1), res1);
+//
+//}

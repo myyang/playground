@@ -758,3 +758,58 @@ int min_bus_to_destination(std::vector<std::vector<int>>& routers, int src, int 
     }
     return -1;
 }
+
+// #1129
+// FIXME
+std::vector<int> shortest_alternating_path(
+        int n,
+        std::vector<std::vector<int>>& red_edges,
+        std::vector<std::vector<int>>& blue_edges)
+{
+    std::vector<std::unordered_set<int>> edges_r(n);
+    std::vector<std::unordered_set<int>> edges_b(n);
+
+    for (auto &e: red_edges) edges_r[e[0]].emplace(e[1]);
+    for (auto &e: blue_edges) edges_b[e[0]].emplace(e[1]);
+
+    std::unordered_set<int> seen_r;
+    std::unordered_set<int> seen_b;
+
+    std::vector<int> res(n, -1);
+
+    std::queue<std::tuple<int, int>> q; // (node, color)
+
+    q.push(std::make_tuple(0, 0)); // red
+    q.push(std::make_tuple(0, 1)); // blue
+
+    seen_r.emplace(0);
+    seen_b.emplace(0);
+
+    int steps = 0;
+
+    while (!q.empty())
+    {
+        int size = q.size();
+        while (size--)
+        {
+            int node, is_red;
+            std::tie(node, is_red) = q.front();
+            q.pop();
+
+            res[node] = res[node] >= 0 ? std::min(res[node], steps) : steps;
+            auto& edges = is_red ? edges_r : edges_b;
+            auto& seen = is_red ? seen_r : seen_b;
+
+            for (int nxt: edges[node])
+            {
+                if (seen.count(node)) continue;
+                seen.emplace(nxt);
+                q.push(std::make_tuple(nxt, 1 - is_red));
+            }
+        }
+        ++steps;
+    }
+
+    return res;
+}
+

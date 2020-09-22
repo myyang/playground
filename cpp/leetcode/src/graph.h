@@ -60,4 +60,10 @@ int minimum_genetic_mutation(std::string start, std::string end, std::vector<std
 // #815
 int min_bus_to_destination(std::vector<std::vector<int>> &routers, int src, int tgr);
 
+// #1129
+std::vector<int> shortest_alternating_path(
+        int n,
+        std::vector<std::vector<int>>& red_edges,
+        std::vector<std::vector<int>>& blue_edges);
+
 #endif
