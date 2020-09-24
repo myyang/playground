@@ -66,4 +66,8 @@ std::vector<int> shortest_alternating_path(
         std::vector<std::vector<int>>& red_edges,
         std::vector<std::vector<int>>& blue_edges);
 
+// #743
+int network_delay_time_bellmanford(std::vector<std::vector<int>>& time, int n, int k);
+int network_delay_time_floydwarshall(std::vector<std::vector<int>>& time, int n, int k);
+
 #endif

@@ -327,3 +327,17 @@ TEST(graph, Q815_min_bus_to_destination_tests)
 //    EXPECT_EQ (shortest_alternating_path(n, red_edges1, blue_edges1), res1);
 //
 //}
+
+TEST(graph, Q743_network_delay_time_bellmanford_tests)
+{
+    int n = 4, k = 2;
+    std::vector<std::vector<int>> times = {{2,1,1},{2,3,1},{3,4,1}};
+    EXPECT_EQ (network_delay_time_bellmanford(times, n, k), 2);
+}
+
+TEST(graph, Q743_network_delay_time_floydwarshall_tests)
+{
+    int n = 4, k = 2;
+    std::vector<std::vector<int>> times = {{2,1,1},{2,3,1},{3,4,1}};
+    EXPECT_EQ (network_delay_time_floydwarshall(times, n, k), 2);
+}

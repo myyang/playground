@@ -813,3 +813,55 @@ std::vector<int> shortest_alternating_path(
     return res;
 }
 
+// #743
+int network_delay_time_bellmanford(
+        std::vector<std::vector<int>>& times,
+        int n,
+        int k
+) {
+    int large = 1e9 + 1;
+    std::vector<int> mTime(n, large);
+    // be careful this init value
+    mTime[k-1] = 0;
+
+    for (int i = 0; i < n; ++i)
+    {
+        for (const auto& time: times)
+        {
+            // be careful this index value -1
+            int u = time[0]-1, v = time[1]-1, w = time[2];
+            mTime[v] = std::min(time[v], time[u] + w);
+        }
+    }
+
+    int max_ele = *std::max_element(mTime.begin(), mTime.end());
+    return max_ele >= large ? -1 : max_ele;
+}
+
+// #743
+int network_delay_time_floydwarshall(
+        std::vector<std::vector<int>>& times,
+        int n,
+        int k
+) {
+    int large = 1e9 + 1;
+    std::vector<std::vector<int>> graph(n, std::vector<int>(n, large));
+
+    for (const auto& time: times)
+        graph[time[0]-1][time[1]-1] = time[2];
+
+    for (int i = 0; i < n; ++i)
+        graph[i][i] = 0;
+
+    for (int x = 0; x < n; ++x)
+    {
+        for (int i = 0; i < n; ++i)
+        {
+            for (int j = 0; j < n; ++j)
+                graph[i][j] = std::min(graph[i][j], graph[i][x] + graph[x][j]);
+        }
+    }
+
+    int max_ele = *std::max_element(graph[k-1].begin(), graph[k-1].end());
+    return max_ele >= large ? -1 : max_ele;
+}
