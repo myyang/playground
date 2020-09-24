@@ -70,4 +70,8 @@ std::vector<int> shortest_alternating_path(
 int network_delay_time_bellmanford(std::vector<std::vector<int>>& time, int n, int k);
 int network_delay_time_floydwarshall(std::vector<std::vector<int>>& time, int n, int k);
 
+// #787
+int find_cheapest_price_bellmanford(int n, std::vector<std::vector<int>>& flights, int src, int tgr, int k);
+int find_cheapest_price_bellmanford_2(int n, std::vector<std::vector<int>>& flights, int src, int tgr, int k);
+
 #endif

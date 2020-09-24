@@ -865,3 +865,57 @@ int network_delay_time_floydwarshall(
     int max_ele = *std::max_element(graph[k-1].begin(), graph[k-1].end());
     return max_ele >= large ? -1 : max_ele;
 }
+
+// #787
+int find_cheapest_price_bellmanford(
+        int n,
+        std::vector<std::vector<int>>& flights,
+        int src,
+        int tgr,
+        int k
+) {
+    int max_price = 1e9 + 1;
+    std::vector<std::vector<int>> dp(k+2, std::vector<int>(n, max_price));
+    dp[0][src] = 0;
+
+    // this k should use =
+    // allow steps k iteration
+    for (int i = 1; i <= k+1; ++i)
+    {
+        dp[i][src] = 0;
+        for (const auto& f: flights)
+            dp[i][f[1]] = std::min(dp[i][f[1]], dp[i-1][f[0]] + f[2]);
+    }
+
+    return dp[k+1][tgr] >= max_price ? -1 : dp[k+1][tgr];
+}
+
+// #787
+int find_cheapest_price_bellmanford_2(
+        int n,
+        std::vector<std::vector<int>>& flights,
+        int src,
+        int tgr,
+        int k
+) {
+    int max_price = 1e9 + 1;
+    std::vector<int> cost(n, max_price);
+    cost[src] = 0;
+
+    // this k should use =
+    // allow steps k iteration
+    for (int i = 0; i <= k; ++i)
+    {
+        // this copy is required to preserved last step status
+        std::vector<int> next(cost);
+        for (const auto& f: flights)
+        {
+            next[f[1]] = std::min(next[f[1]], cost[f[0]] + f[2]);
+            // original implemeent with same cost won't work
+            // cost[f[1]] = std::min(cost[f[1]], cost[f[0]] + f[2]);
+        }
+        cost.swap(next);
+    }
+
+    return cost[tgr] >= max_price ? -1 : cost[tgr];
+}

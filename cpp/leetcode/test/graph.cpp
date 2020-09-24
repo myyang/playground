@@ -341,3 +341,19 @@ TEST(graph, Q743_network_delay_time_floydwarshall_tests)
     std::vector<std::vector<int>> times = {{2,1,1},{2,3,1},{3,4,1}};
     EXPECT_EQ (network_delay_time_floydwarshall(times, n, k), 2);
 }
+
+TEST(graph, Q787_find_cheapest_price_bellmanford_tests)
+{
+    std::vector<std::vector<int>> flights = {{0,1,200},{1,2,100},{0,2,500}};
+    EXPECT_EQ (find_cheapest_price_bellmanford(3, flights, 0, 2, 0), 500);
+    EXPECT_EQ (find_cheapest_price_bellmanford(3, flights, 0, 2, 1), 300);
+    EXPECT_EQ (find_cheapest_price_bellmanford(3, flights, 0, 2, 2), 300);
+}
+
+TEST(graph, Q787_find_cheapest_price_bellmanford_2_tests)
+{
+    std::vector<std::vector<int>> flights = {{0,1,200},{1,2,100},{0,2,500}};
+    EXPECT_EQ (find_cheapest_price_bellmanford_2(3, flights, 0, 2, 0), 500);
+    EXPECT_EQ (find_cheapest_price_bellmanford_2(3, flights, 0, 2, 1), 300);
+    EXPECT_EQ (find_cheapest_price_bellmanford_2(3, flights, 0, 2, 2), 300);
+}
