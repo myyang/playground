@@ -127,7 +127,7 @@ TEST(dp, Q63_unique_paths_2_tests)
     EXPECT_EQ(unique_paths_2(grids4), 10);
 }
 
-TEST(dp, min_path_sum_tests)
+TEST(dp, Q64_min_path_sum_tests)
 {
     std::vector<std::vector<int>> grids0 = {
         {1, 1, 2, 3, 4},
@@ -142,4 +142,80 @@ TEST(dp, min_path_sum_tests)
         {3, 4, 5, 6, 1},
     };
     EXPECT_EQ(min_path_sum(grids1), 8);
+}
+
+TEST(dp, Q120_min_total_tests)
+{
+    std::vector<std::vector<int>> grids0 = {
+        {2},
+        {3,4},
+        {5,6,1},
+        {8,9,10,11},
+    };
+    EXPECT_EQ(min_total(grids0), 17);
+
+    std::vector<std::vector<int>> grids1 = {
+        {2},
+        {3,4},
+        {6,5,7},
+        {4,1,8,3},
+    };
+    EXPECT_EQ(min_total(grids1), 11);
+}
+
+TEST(dp, Q174_min_hp_tests)
+{
+    std::vector<std::vector<int>> grids0 = {
+        {-2,-3,3},
+        {-5,-10,1},
+        {10,30,-5},
+    };
+    EXPECT_EQ(min_hp(grids0), 7);
+}
+
+TEST(dp, Q85_max_rectangle_tests)
+{
+    std::vector<std::vector<int>> grids0 = {
+        {1,0,1,0,0,0},
+        {1,0,1,1,1,0},
+        {1,0,1,1,1,0},
+        {0,0,1,1,0,0},
+    };
+    EXPECT_EQ(max_rectangle(grids0), 6);
+}
+
+TEST(dp, Q221_num_matrix_tests)
+{
+    std::vector<std::vector<int>> grids0 = {
+        {3, 0, 1, 4, 2},
+        {5, 6, 3, 2, 1},
+        {1, 2, 0, 1, 5},
+        {4, 1, 0, 1, 7},
+        {1, 0, 3, 0, 5}
+    };
+
+    std::unique_ptr<RangeQuery2D> uni_ptr = std::make_unique<RangeQuery2D>(grids0);
+
+    EXPECT_EQ(uni_ptr->get_sum(2, 1, 4, 3), 8);
+    EXPECT_EQ(uni_ptr->get_sum(1, 1, 2, 2), 11);
+    EXPECT_EQ(uni_ptr->get_sum(1, 2, 2, 4), 12);
+}
+
+TEST(dp, Q1277_count_sqr_tests)
+{
+    std::vector<std::vector<int>> grids0 = {
+        {1, 1, 0, 1, 1, 1},
+        {1, 1, 0, 1, 1, 1},
+        {0, 0, 0, 1, 1, 1},
+        {0, 0, 1, 0, 0, 0},
+    };
+    EXPECT_EQ(count_sqr(grids0), 14 + 1 + 5);
+
+    std::vector<std::vector<int>> grids1 = {
+        {1, 1, 0, 0, 1, 1},
+        {1, 0, 0, 0, 1, 0},
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 1, 0, 0, 0},
+    };
+    EXPECT_EQ(count_sqr(grids1), 7);
 }

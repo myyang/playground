@@ -1,3 +1,4 @@
+#include <functional>
 #include <unordered_map>
 #include <vector>
 #include <algorithm>
@@ -158,4 +159,125 @@ int min_path_sum(std::vector<std::vector<int>>& grids) {
     }
 
     return dp[m-1][n-1];
+}
+
+// #120
+//    [2],             [2],
+//   [3,4],           [5,6],
+//  [5,6,1],         [10,11,7],
+// [8,9,10,11]      [18,19,17,18],
+int min_total(std::vector<std::vector<int>>& t) {
+    int n = t.size();
+
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j <= i; ++j)
+        {
+            if (i == 0 && j == 0) continue;
+            if (j == 0) t[i][j] += t[i-1][j];
+            else if (i == j) t[i][j] += t[i-1][j-1];
+            else t[i][j] += std::min(t[i-1][j], t[i-1][j-1]);
+        }
+    }
+
+    return *std::min_element(std::begin(t.back()), std::end(t.back()));
+}
+
+// #174
+int min_hp(std::vector<std::vector<int>>& t) {
+    int m = t.size(), n = t[0].size();
+
+    std::vector<std::vector<int>> dp(m+1, std::vector<int>(n+1, INT_MAX));
+    dp[m][n-1] = dp[m-1][n] = 1;
+
+    for (int i = m-1; i > -1; --i)
+        for (int j = n -1; j > -1; --j)
+            dp[i][j] = std::max(1, std::min(dp[i+1][j], dp[i][j+1]) - t[i][j]);
+
+    return dp[0][0];
+}
+
+// #85
+int max_rectangle(std::vector<std::vector<int>>& t) {
+    int m = t.size();
+    if (m == 0) return 0;
+    int n = t[0].size();
+
+
+    std::vector<std::vector<int>> dp(m, std::vector<int>(n));
+
+    for (int i = 0; i < m; ++i)
+        for (int j = 0; j < n; ++j)
+            dp[i][j] = t[i][j] ? (j == 0 ? 1 : dp[i][j-1] + 1) : 0;
+
+    int ans = 0;
+
+    for (int i = 0; i < m; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            int len = INT_MAX;
+            for (int k = i; k < n; ++k)
+            {
+                len = std::min(len, dp[k][j]);
+                if (len == 0) break;
+                ans = std::max(len * (k - i + 1), ans);
+            }
+        }
+    }
+
+    return ans;
+}
+
+// #221
+// [1, 0]
+// [2, 3]
+//
+// [0, 0, 0]
+// [0, 1, 0]
+// [0, 3, 6]
+RangeQuery2D::RangeQuery2D(std::vector<std::vector<int>>& t) {
+    int m = t.size();
+    if (m == 0) return;
+    int n = t[0].size();
+
+    std::vector<std::vector<int>> tmp(m+1, std::vector<int>(n+1));
+    dp = tmp;
+
+    // NOTE this iteration loop
+    for (int i = 1; i <= m; ++i)
+    {
+        for (int j = 1; j <= n; ++j)
+        {
+            dp[i][j] = t[i-1][j-1] - dp[i-1][j-1] + dp[i-1][j] + dp[i][j-1];
+        }
+    }
+
+}
+
+int RangeQuery2D::get_sum(int x1, int y1, int x2, int y2)  {
+    return dp[x1][y1] - dp[x1][y2+1] - dp[x2+1][y1] + dp[x2+1][y2+1];
+}
+
+// #1277
+int count_sqr(std::vector<std::vector<int>>& t) {
+    int m = t.size();
+    int n = t[0].size();
+
+    std::vector<std::vector<int>> dp(m, std::vector<int>(n));
+
+    int ans = 0;
+
+    for (int i = 0; i < m; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            dp[i][j] = t[i][j];
+            if (i && j && dp[i][j])
+                dp[i][j] = std::min({dp[i - 1][j - 1], dp[i][j - 1], dp[i - 1][j]}) + 1;
+            ans += dp[i][j];
+        }
+    }
+
+    return ans;
 }

@@ -33,4 +33,25 @@ int unique_paths_2(std::vector<std::vector<int>>&);
 // #64
 int min_path_sum(std::vector<std::vector<int>>&);
 
+// #120
+int min_total(std::vector<std::vector<int>>&);
+
+// #174
+int min_hp(std::vector<std::vector<int>>&);
+
+// #85
+int max_rectangle(std::vector<std::vector<int>>&);
+
+// #221
+class RangeQuery2D {
+    public:
+        RangeQuery2D(std::vector<std::vector<int>>&);
+        int get_sum(int, int, int, int);
+    private:
+        std::vector<std::vector<int>> dp;
+};
+
+// #1277
+int count_sqr(std::vector<std::vector<int>>&);
+
 #endif
