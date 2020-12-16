@@ -82,3 +82,64 @@ TEST(dp, Q53_maximum_subarray_tests)
     EXPECT_EQ(maximum_subarray(nums3), 8);
 
 }
+
+TEST(dp, Q62_unique_paths_tests)
+{
+    EXPECT_EQ(unique_paths(3, 2), 3);
+    EXPECT_EQ(unique_paths(5, 3), 15);
+}
+
+TEST(dp, Q63_unique_paths_2_tests)
+{
+    std::vector<std::vector<int>> grids0 = {
+        {0, 0, 0, 0, 0},
+        {0, 1, 0, 1, 1},
+        {0, 1, 0, 1, 0},
+    };
+    EXPECT_EQ(unique_paths_2(grids0), 0);
+
+    std::vector<std::vector<int>> grids1 = {
+        {0, 0, 0, 0, 0},
+        {0, 1, 0, 1, 0},
+        {0, 1, 0, 1, 0},
+    };
+    EXPECT_EQ(unique_paths_2(grids1), 1);
+
+    std::vector<std::vector<int>> grids2 = {
+        {0, 1, 0, 0, 0},
+        {0, 1, 0, 0, 0},
+        {0, 1, 0, 0, 0},
+    };
+    EXPECT_EQ(unique_paths_2(grids2), 0);
+
+    std::vector<std::vector<int>> grids3 = {
+        {0, 1, 0, 0, 0},
+        {0, 1, 0, 1, 0},
+        {0, 0, 0, 1, 0},
+    };
+    EXPECT_EQ(unique_paths_2(grids3), 0);
+
+    std::vector<std::vector<int>> grids4 = {
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 1},
+        {0, 0, 0, 0, 0},
+    };
+    EXPECT_EQ(unique_paths_2(grids4), 10);
+}
+
+TEST(dp, min_path_sum_tests)
+{
+    std::vector<std::vector<int>> grids0 = {
+        {1, 1, 2, 3, 4},
+        {2, 1, 1, 1, 1},
+        {3, 4, 5, 6, 1},
+    };
+    EXPECT_EQ(min_path_sum(grids0), 7);
+
+    std::vector<std::vector<int>> grids1 = {
+        {1, 1, 2, 3, 4},
+        {2, 2, 1, 1, 1},
+        {3, 4, 5, 6, 1},
+    };
+    EXPECT_EQ(min_path_sum(grids1), 8);
+}

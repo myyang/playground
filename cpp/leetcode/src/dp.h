@@ -24,4 +24,13 @@ int longest_subsequence(std::vector<int>&, int diff);
 // #53
 int maximum_subarray(std::vector<int>&);
 
+// #62
+int unique_paths(int, int);
+
+// #63
+int unique_paths_2(std::vector<std::vector<int>>&);
+
+// #64
+int min_path_sum(std::vector<std::vector<int>>&);
+
 #endif

@@ -85,3 +85,77 @@ int maximum_subarray(std::vector<int>& nums) {
     }
     return max_dp;
 }
+
+// #62
+int unique_paths(int m, int n) {
+    std::vector<int> dp(m, 1);
+    for (int i = 0; i < n-1; ++i)
+        for (int j = 1; j < m; ++j)
+            dp[j] = dp[j-1] + dp[j];
+    return dp[m-1];
+}
+
+// #63
+int unique_paths_2(std::vector<std::vector<int>>& grids) {
+    int n = grids.size();
+    int m = grids[0].size();
+    /* space optimized
+       std::vector<int> dp(m, INT_MIN);
+       dp[0] = 1;
+       for (int i = 1; i < m; ++i) dp[i] = (grids[0][i] == 1 || dp[i-1] == 0) ? 0: 1;
+
+       for (int i = 1; i < n; ++i)
+       {
+       if (grids[i][0] == 1) dp[0] = 0;
+
+       for (int j = 1; j < m; ++j)
+       if (grids[i][j] == 1) dp[j] = 0;
+       else dp[j] = dp[j-1] + dp[j];
+       }
+
+       for (auto i: dp) printf("%d ", i); printf("\n");
+       return dp[dp.size()-1];
+       */
+    std::vector<std::vector<int>> dp(n, std::vector<int>(m, 0));
+    dp[0][0] = 1;
+    for (int i = 1; i < n; ++i) dp[i][0] = (dp[i-1][0] == 0 || grids[i][0] == 1) ? 0 : 1;
+    for (int i = 1; i < m; ++i) dp[0][i] = (dp[0][i-1] == 0 || grids[0][i] == 1) ? 0 : 1;
+
+    for (int i = 1; i < n; ++i) {
+        for (int j = 1; j < m; ++j) {
+            if (grids[i][j] == 1) dp[i][j] = 0;
+            else dp[i][j] = dp[i][j-1] + dp[i-1][j];
+        }
+    }
+
+    return dp[n-1][m-1];
+}
+
+// #64
+int min_path_sum(std::vector<std::vector<int>>& grids) {
+    int m = grids.size();
+    if (m == 0) return 0;
+
+    int n = grids[0].size();
+
+    // note: padding may lead to wrong cost at row 1 and column 1
+    //std::vector<std::vector<int>> dp(m+1, std::vector<int>(n+1, 0));
+    //for (int i = 1; i <=m; ++i)
+    //  for (int j = 1; j <= n; ++j)
+    //      dp[i][j] = std::min(dp[i-1][j], dp[i][j-1]) + grids[i-1][j-1];
+    std::vector<std::vector<int>> dp(m, std::vector<int>(n, 0));
+
+    dp[0][0] = grids[0][0];
+    for (int i = 1; i < m; ++i) dp[i][0] = dp[i-1][0] + grids[i][0];
+    for (int i = 1; i < n; ++i) dp[0][i] = dp[0][i-1] + grids[0][i];
+
+    for (int i = 1; i < m; ++i)
+    {
+        for (int j = 1; j < n; ++j)
+        {
+            dp[i][j] = std::min(dp[i-1][j], dp[i][j-1]) + grids[i-1][j-1];
+        }
+    }
+
+    return dp[m-1][n-1];
+}
