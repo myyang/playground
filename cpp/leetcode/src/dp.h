@@ -54,4 +54,8 @@ class RangeQuery2D {
 // #1277
 int count_sqr(std::vector<std::vector<int>>&);
 
+// #198
+int rob_top_down(std::vector<int>&);
+int rob_bottom_up(std::vector<int>&);
+
 #endif

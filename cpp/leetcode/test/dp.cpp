@@ -219,3 +219,14 @@ TEST(dp, Q1277_count_sqr_tests)
     };
     EXPECT_EQ(count_sqr(grids1), 7);
 }
+
+TEST(dp, Q198_rob_house_tests)
+{
+    std::vector<int> money0 = {2,1,1,2};
+    EXPECT_EQ(rob_top_down(money0), 4);
+    EXPECT_EQ(rob_bottom_up(money0), 4);
+
+    std::vector<int> money1 = {1,1,3,2,1,3};
+    EXPECT_EQ(rob_top_down(money1), 7);
+    EXPECT_EQ(rob_bottom_up(money1), 7);
+}

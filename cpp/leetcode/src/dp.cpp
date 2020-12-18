@@ -4,6 +4,7 @@
 #include <algorithm>
 
 #include "dp.h"
+#include "utils.h"
 
 // #70
 int climbing_stairs(int n)
@@ -280,4 +281,44 @@ int count_sqr(std::vector<std::vector<int>>& t) {
     }
 
     return ans;
+}
+
+// #198
+int rob_top_down(std::vector<int>& nums) {
+    if (nums.empty()) return 0;
+
+    int n = nums.size();
+    std::vector<int> dpv(n+1, -1);
+    std::function<int(int)> dp = [&](int i) {
+        if (i <= 0) return 0;
+        if (dpv[i] > 0) return dpv[i];
+
+        return dpv[i] = std::max(dp(i-2) + nums[i-1], dp(i-1));
+    };
+
+    return dp(n);
+}
+
+int rob_bottom_up(std::vector<int>& nums) {
+    if( nums.empty()) return 0;
+
+    int n = nums.size();
+    // dp array
+    //std::vector<int> dp(n+2, 0);
+
+    //for (int i = 2; i < n+2; ++i)
+    //{
+    //    dp[i] = std::max(dp[i-2] + nums[i-2], dp[i-1]);
+    //}
+    //return dp.back();
+
+    // space optimized
+    int dp2 = 0, dp1 = 0;
+    for (int i = 0; i < n; ++i)
+    {
+        int dp = std::max(dp2 + nums[i], dp1);
+        dp2 = dp1;
+        dp1 = dp;
+    }
+    return dp1;
 }
