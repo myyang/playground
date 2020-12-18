@@ -58,4 +58,7 @@ int count_sqr(std::vector<std::vector<int>>&);
 int rob_top_down(std::vector<int>&);
 int rob_bottom_up(std::vector<int>&);
 
+// #213
+int rob_in_circle(std::vector<int>&);
+
 #endif

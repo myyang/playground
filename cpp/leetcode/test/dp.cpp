@@ -230,3 +230,15 @@ TEST(dp, Q198_rob_house_tests)
     EXPECT_EQ(rob_top_down(money1), 7);
     EXPECT_EQ(rob_bottom_up(money1), 7);
 }
+
+TEST(dp, Q213_rob_in_circle_tests)
+{
+    std::vector<int> money0 = {2, 1, 1, 2};
+    EXPECT_EQ(rob_in_circle(money0), 3);
+
+    std::vector<int> money1 = {1,1,3,2,1,3};
+    EXPECT_EQ(rob_in_circle(money1), 6);
+
+    std::vector<int> money2 = {8,2,2,2,2,8};
+    EXPECT_EQ(rob_in_circle(money2), 12);
+}

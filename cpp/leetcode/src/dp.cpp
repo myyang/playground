@@ -322,3 +322,12 @@ int rob_bottom_up(std::vector<int>& nums) {
     }
     return dp1;
 }
+
+// #213
+int rob_in_circle(std::vector<int>& nums) {
+    int n = nums.size();
+    std::vector<int> nums0(nums.begin(), nums.begin() + (n-1));
+    std::vector<int> nums1(nums.begin()+1, nums.end());
+
+    return std::max(rob_bottom_up(nums0), rob_bottom_up(nums1));
+}
