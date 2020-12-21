@@ -270,3 +270,33 @@ TEST(dp, Q140_word_break_2_tests)
     std::vector<std::string> ans2 = {"cat cat cat"};
     EXPECT_EQ(word_break_2("catcatcat", words), ans2);
 }
+
+TEST(dp, Q300_length_of_lis_tests)
+{
+    std::vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 180};
+    EXPECT_EQ(length_of_lis(nums), 5);
+
+    std::vector<int> nums1 = {10, 9, 2, 5, 3, 7, 101, 1};
+    EXPECT_EQ(length_of_lis(nums1), 4);
+
+    std::vector<int> nums2 = {10, 9, 8, 7, 6, 5};
+    EXPECT_EQ(length_of_lis(nums2), 1);
+
+    std::vector<int> nums3 = {};
+    EXPECT_EQ(length_of_lis(nums3), 0);
+}
+
+TEST(dp, Q300_length_of_lis_rec_tests)
+{
+    std::vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 180};
+    EXPECT_EQ(length_of_lis_rec(nums), 5);
+
+    std::vector<int> nums1 = {10, 9, 2, 5, 3, 7, 101, 1};
+    EXPECT_EQ(length_of_lis_rec(nums1), 4);
+
+    std::vector<int> nums2 = {10, 9, 8, 7, 6, 5};
+    EXPECT_EQ(length_of_lis_rec(nums2), 1);
+
+    std::vector<int> nums3 = {};
+    EXPECT_EQ(length_of_lis_rec(nums3), 0);
+}

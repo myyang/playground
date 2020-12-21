@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 #include "dp.h"
 #include "utils.h"
@@ -416,4 +417,55 @@ std::vector<std::string> word_break_2(std::string s, std::vector<std::string>& w
     dp(s, cur);
 
     return res;
+}
+
+// #300
+int length_of_lis(std::vector<int>& nums) {
+    int n = nums.size();
+    if (n == 0) return n;
+    // NOTE: no padding required... padding leads to comparsion fail
+    //std::vector<int> dp (n+1, 1);
+    //for (int i = 1; i < n+1; ++i)
+    //{
+    //    for (int j = 0; j < i; ++j)
+    //    {
+    //    // this comarsion fail with -1
+    //        if (nums[i-1] > nums[j]) dp[i] = std::max(dp[j] + 1, dp[i]);
+    //    }
+    //}
+
+    std::vector<int> dp (n, 1);
+    for (int i = 1; i < n; ++i)
+    {
+        for (int j = 0; j < i; ++j)
+        {
+            if (nums[i] > nums[j]) dp[i] = std::max(dp[j] + 1, dp[i]);
+        }
+    }
+    return *std::max_element(dp.begin(), dp.end());;
+}
+
+int length_of_lis_rec(std::vector<int>& nums) {
+    std::unordered_map<int, int> _m;
+    int max = 0;
+
+    std::function<int(int)> dfs = [&](int idx) {
+        if (idx < 0) return 0;
+        if (_m[idx] > 0) return _m[idx];
+
+        int lis = 1;
+        for (int i = 0; i < idx; ++i) {
+            if (nums[idx] > nums[i])
+                lis = std::max(lis, dfs(i) + 1);
+        }
+        return _m[idx] = lis;
+    };
+    // can't return last
+    //return dfs(nums.size()-1);
+
+    // iterate from first to last
+    for (int i = 0; i < nums.size(); ++i)
+        max = std::max(dfs(i), max);
+
+    return max;
 }

@@ -71,4 +71,8 @@ bool word_break(std::string, std::vector<std::string>&);
 // #140
 std::vector<std::string> word_break_2(std::string, std::vector<std::string>&);
 
+// #300
+int length_of_lis(std::vector<int>&);
+int length_of_lis_rec(std::vector<int>&);
+
 #endif
