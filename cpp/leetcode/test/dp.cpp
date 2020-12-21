@@ -300,3 +300,11 @@ TEST(dp, Q300_length_of_lis_rec_tests)
     std::vector<int> nums3 = {};
     EXPECT_EQ(length_of_lis_rec(nums3), 0);
 }
+
+TEST(dp, Q673_number_length_of_list_tests) {
+    std::vector<int> nums0 = {1, 3, 6, 5, 4, 7};
+    EXPECT_EQ(number_length_of_lis(nums0), 3);
+
+    std::vector<int> nums1 = {9,8,7,6,5};
+    EXPECT_EQ(number_length_of_lis(nums1), 5);
+}

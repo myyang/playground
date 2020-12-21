@@ -469,3 +469,36 @@ int length_of_lis_rec(std::vector<int>& nums) {
 
     return max;
 }
+
+// #673
+int number_length_of_lis(std::vector<int>& nums) {
+    int n = nums.size();
+    std::vector<int> dp(n, 1);
+    std::vector<int> cnt(n, 1);
+
+    for (int i = 1; i < n; ++i)
+    {
+        for (int j = 0; j < i; ++j)
+        {
+            if (nums[i] > nums[j])
+            {
+                if (dp[i] < dp[j] + 1)
+                {
+                    dp[i] = dp[j] + 1;
+                    cnt[i] = cnt[j];
+                } else if (dp[i] == dp[j] + 1)
+                {
+                    cnt[i] += cnt[j];
+                }
+            }
+        }
+    }
+
+    int max_len = *std::max_element(cnt.begin(), cnt.end());
+
+    int count = 0;
+    for (int i = 0; i < n; ++i)
+        if (cnt[i] == max_len) count += cnt[i];
+
+    return count;
+}

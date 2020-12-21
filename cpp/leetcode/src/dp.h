@@ -75,4 +75,7 @@ std::vector<std::string> word_break_2(std::string, std::vector<std::string>&);
 int length_of_lis(std::vector<int>&);
 int length_of_lis_rec(std::vector<int>&);
 
+// #673
+int number_length_of_lis(std::vector<int>&);
+
 #endif
