@@ -2,6 +2,7 @@
 #define LEETCODE_UTILS_H
 
 #include <vector>
+#include <string>
 
 void printV(std::vector<int>& t) {
     for (auto i: t) {
@@ -18,6 +19,13 @@ void print2DV(std::vector<std::vector<int>>& t) {
         printf("\n");
     }
     printf("===============\n");
+}
+
+void printVstr(std::vector<std::string>& t) {
+    for (auto i: t) {
+        printf("%s ", i.c_str());
+    }
+    printf("\n===============\n");
 }
 
 #endif

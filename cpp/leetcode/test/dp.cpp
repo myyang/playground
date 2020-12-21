@@ -248,3 +248,25 @@ TEST(dp, Q279_perfect_squares_tests)
     EXPECT_EQ(perfect_squares(12), 3);
     EXPECT_EQ(perfect_squares(13), 2);
 }
+
+TEST(dp, Q139_word_break_tests)
+{
+    std::vector<std::string> words = {"leet", "code"};
+    EXPECT_EQ(word_break("leetcodes", words), false);
+    EXPECT_EQ(word_break("leetscode", words), false);
+    EXPECT_EQ(word_break("leetcode", words), true);
+}
+
+TEST(dp, Q140_word_break_2_tests)
+{
+    std::vector<std::string> words = {"cat","cats","and","sand","dog"};
+
+    std::vector<std::string> ans0 = {"cat sand dog", "cats and dog"};
+    EXPECT_EQ(word_break_2("catsanddog", words), ans0);
+
+    std::vector<std::string> ans1 = {};
+    EXPECT_EQ(word_break_2("cad", words), ans1);
+
+    std::vector<std::string> ans2 = {"cat cat cat"};
+    EXPECT_EQ(word_break_2("catcatcat", words), ans2);
+}

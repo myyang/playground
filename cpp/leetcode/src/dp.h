@@ -2,6 +2,7 @@
 #define LEETCODE_DP_H
 
 #include <vector>
+#include <string>
 
 // #70
 int climbing_stairs(int n);
@@ -63,5 +64,11 @@ int rob_in_circle(std::vector<int>&);
 
 // #279
 int perfect_squares(int);
+
+// #139
+bool word_break(std::string, std::vector<std::string>&);
+
+// #140
+std::vector<std::string> word_break_2(std::string, std::vector<std::string>&);
 
 #endif

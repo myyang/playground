@@ -350,3 +350,70 @@ int perfect_squares(int n) {
 
     return dp[n];
 }
+
+// #139
+bool word_break(std::string s, std::vector<std::string>& words) {
+    std::unordered_map<std::string, bool> _d;
+    for (auto word: words) _d[word] = true;
+
+    std::function<bool(std::string)> dp = [&](std::string word) {
+        return _d.count(word);
+    };
+
+
+    for (int i = 0; i < s.size(); ++i)
+    {
+        std::string s0 = s.substr(0, i);
+        std::string s1 = s.substr(i, s.size() - i);
+        bool t = dp(s0) && dp(s1);
+        if (t) return true;
+    }
+
+    return false;
+}
+
+
+std::string str_vec_join(std::vector<std::string>& words) {
+    if (words.size() == 0) return "";
+    if (words.size() == 1) return words[0];
+
+    std::string s = words[0];
+    for (int i = 1; i < words.size(); ++i)
+        s += " " + words[i];
+    return s;
+}
+
+// #140
+std::vector<std::string> word_break_2(std::string s, std::vector<std::string>& words) {
+    std::vector<std::string> res;
+
+    std::unordered_map<std::string, bool> _d;
+    for (auto word: words) _d[word] = true;
+
+    std::function<void(std::string, std::vector<std::string>&)> dp = [&](
+            std::string rest, std::vector<std::string>& cur) {
+        if (rest.size() == 0)
+        {
+            res.push_back(str_vec_join(cur));
+            return;
+        }
+
+        for (int i = 1; i < rest.size()+1; ++i)
+        {
+            // substr usage
+            std::string s = rest.substr(0, i);
+            if (!_d.count(s)) continue;
+
+            cur.push_back(s);
+            dp(rest.substr(i, res.size()-i), cur);
+            cur.pop_back();
+        }
+
+        return;
+    };
+
+    std::vector<std::string> cur;
+    dp(s, cur);
+
+    return res;
+}
