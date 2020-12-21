@@ -242,3 +242,9 @@ TEST(dp, Q213_rob_in_circle_tests)
     std::vector<int> money2 = {8,2,2,2,2,8};
     EXPECT_EQ(rob_in_circle(money2), 12);
 }
+
+TEST(dp, Q279_perfect_squares_tests)
+{
+    EXPECT_EQ(perfect_squares(12), 3);
+    EXPECT_EQ(perfect_squares(13), 2);
+}

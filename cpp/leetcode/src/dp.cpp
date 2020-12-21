@@ -331,3 +331,22 @@ int rob_in_circle(std::vector<int>& nums) {
 
     return std::max(rob_bottom_up(nums0), rob_bottom_up(nums1));
 }
+
+// #279
+int perfect_squares(int n) {
+    // note: get min, set to max
+    std::vector<int> dp(n+1, INT_MAX);
+    dp[0] = 0;
+
+    for (int i = 1; i < n+1; ++i)
+    {
+        // this loop condition is critical, be careful equal
+        for (int j = 1; j * j <= i; ++j)
+        {
+            int d = j * j;
+            dp[i] = std::min(dp[i-d] + 1, dp[i]);
+        }
+    }
+
+    return dp[n];
+}

@@ -61,4 +61,7 @@ int rob_bottom_up(std::vector<int>&);
 // #213
 int rob_in_circle(std::vector<int>&);
 
+// #279
+int perfect_squares(int);
+
 #endif
