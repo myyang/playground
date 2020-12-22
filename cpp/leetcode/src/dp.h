@@ -78,4 +78,7 @@ int length_of_lis_rec(std::vector<int>&);
 // #673
 int number_length_of_lis(std::vector<int>&);
 
+// #1105
+int fill_book_shelves(std::vector<std::vector<int>>&, int);
+
 #endif

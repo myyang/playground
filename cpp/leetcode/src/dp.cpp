@@ -502,3 +502,32 @@ int number_length_of_lis(std::vector<int>& nums) {
 
     return count;
 }
+
+// #1105
+int fill_book_shelves(std::vector<std::vector<int>>& books, int sw) {
+    int n = books.size();
+    // dp[i] is min height to place books from 0 ~ i
+    std::vector<int> dp(n, INT_MAX/2);
+    //for (int i = 0; i < n; ++i)
+    //{
+    //    int w = 0;
+    //    int h = 0;
+    //    for (int j = i; j < n; ++j)
+    //    {
+    //        if ((w += books[i][0]) > sw) break;
+    //        h = std::max(books[i][1], h);
+    //        dp[j] = std::min(dp[j], (i == 0 ? 0: dp[i-1]) + h);
+    //    }
+    //    printV(dp);
+    //}
+    for (int i = 0; i < n; ++i) {
+        int w = 0;
+        int h = 0;
+        for (int j = i; j < n; ++j) {
+            if ((w += books[j][0]) > sw) break;
+            h = std::max(h, books[j][1]);
+            dp[j] = std::min(dp[j], (i == 0 ? 0 : dp[i - 1]) + h);
+        }
+    }
+    return dp.back();
+}

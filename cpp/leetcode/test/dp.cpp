@@ -308,3 +308,14 @@ TEST(dp, Q673_number_length_of_list_tests) {
     std::vector<int> nums1 = {9,8,7,6,5};
     EXPECT_EQ(number_length_of_lis(nums1), 5);
 }
+
+TEST(dp, Q1105_fill_book_shelves_tests) {
+    std::vector<std::vector<int>> books0 = {{1,1},{2,3},{2,3},{1,1},{1,1},{1,1},{1,2}};
+    EXPECT_EQ(fill_book_shelves(books0, 4), 6);
+
+    std::vector<std::vector<int>> books1 = {{1,1},{2,3}};
+    EXPECT_EQ(fill_book_shelves(books1, 4), 3);
+
+    std::vector<std::vector<int>> books2 = {{1,1},{2,3},{2,3}};
+    EXPECT_EQ(fill_book_shelves(books2, 4), 4);
+}
