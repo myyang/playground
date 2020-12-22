@@ -531,3 +531,22 @@ int fill_book_shelves(std::vector<std::vector<int>>& books, int sw) {
     }
     return dp.back();
 }
+
+// #89
+std::vector<int> gray_code(int n) {
+    std::vector<std::vector<int>> res;
+    res.push_back({0});
+    if (n <= 0) return res.back();
+
+    for (int i = 1; i <= n; i++) {
+        std::vector<int> sub;
+        for (auto ele: res.back())
+        {
+            sub.push_back(ele);
+            sub.push_back(ele | 1 << (i-1));
+        }
+        res.push_back(sub);
+    }
+
+    return res.back();
+}

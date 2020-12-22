@@ -81,4 +81,7 @@ int number_length_of_lis(std::vector<int>&);
 // #1105
 int fill_book_shelves(std::vector<std::vector<int>>&, int);
 
+// #87
+std::vector<int> gray_code(int);
+
 #endif

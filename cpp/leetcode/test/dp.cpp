@@ -319,3 +319,17 @@ TEST(dp, Q1105_fill_book_shelves_tests) {
     std::vector<std::vector<int>> books2 = {{1,1},{2,3},{2,3}};
     EXPECT_EQ(fill_book_shelves(books2, 4), 4);
 }
+
+TEST(dp, Q87_gray_code_tests) {
+    std::vector<int> ans0 = {0};
+    EXPECT_EQ(gray_code(0), ans0);
+
+    std::vector<int> ans1 = {0,1};
+    EXPECT_EQ(gray_code(1), ans1);
+
+    std::vector<int> ans2 = {0,2,1,3};
+    EXPECT_EQ(gray_code(2), ans2);
+
+    std::vector<int> ans3 = {0,4,2,6,1,5,3,7};
+    EXPECT_EQ(gray_code(3), ans3);
+}
