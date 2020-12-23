@@ -219,7 +219,8 @@ int max_rectangle(std::vector<std::vector<int>>& t) {
         for (int j = 0; j < n; ++j)
         {
             int len = INT_MAX;
-            for (int k = i; k < n; ++k)
+            // be careful this range
+            for (int k = i; k < m; ++k)
             {
                 len = std::min(len, dp[k][j]);
                 if (len == 0) break;
