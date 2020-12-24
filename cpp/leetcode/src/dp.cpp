@@ -595,3 +595,56 @@ int min_dest_rec(std::string s1, std::string s2) {
     };
     return rec(l1, l2);
 }
+
+// #10
+bool is_match(std::string s, std::string p) {
+    int ls = s.length(), lp = p.length();
+    std::vector<std::vector<bool>> dp(ls+1, std::vector<bool>(lp+1, false));
+    dp[0][0] = true;
+    for (int i = 2; i <= lp && p[i-1] == '*'; i += 2)
+        dp[0][i] = true;
+
+    for (int i = 1; i <= ls; ++i)
+    {
+        for (int j = 1; j <= lp; ++j)
+        {
+            int si = i-1, pi = j-1;
+
+            if (s[si] == p[pi] || p[pi] == '.')
+            {
+                dp[i][j] = dp[si][pi];
+            }
+            else if (p[pi] == '*')
+            {
+                dp[i][j] = dp[i][j-2] || ((s[si] == p[pi-1] || p[pi-1] == '.') && dp[i-1][j]);
+            }
+        }
+    }
+    return dp[ls][lp];
+}
+
+// #97
+bool interleave(std::string s1, std::string s2, std::string s3) {
+    int l1 = s1.length(), l2 = s2.length(), l3 = s3.length();
+    if (l3 != (l1+l2)) return false;
+
+    // dp[i][j]: whehter s3[0:i+j] is interleave of s1[0:i] and s2[0:j]
+    std::vector<std::vector<bool>> dp(l1+1, std::vector<bool>(l2+1, false));
+    dp[0][0] = true;
+
+    // this for loop index doesn't extend dp[0][0]
+    //for (int i = 1; i <= l1; ++i)
+    //    for (int j = 1; j <= l2; ++j)
+    //        dp[i][j] = (dp[i-1][j] && s1[i-1] == s3[i+j-1]) || (dp[i][j-1] && s2[j-1] == s3[i+j-1]);
+
+    for (int i = 0; i <= l1; ++i)
+    {
+        for (int j = 0; j <= l2; ++j)
+        {
+            if (i > 0) dp[i][j] = dp[i][j] || (dp[i-1][j] && s1[i-1] == s3[i+j-1]);
+            if (j > 0) dp[i][j] = dp[i][j] || (dp[i][j-1] && s2[j-1] == s3[i+j-1]);
+        }
+    }
+
+    return dp[l1][l2];
+}

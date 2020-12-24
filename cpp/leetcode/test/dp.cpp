@@ -355,3 +355,21 @@ TEST(dp, Q72_min_dest_rec_tests)
     EXPECT_EQ(min_dest_rec("a", ""), 1);
     EXPECT_EQ(min_dest_rec("", "a"), 1);
 }
+
+TEST(dp, Q10_is_match_tests)
+{
+    EXPECT_EQ(is_match("ab", ".*"), true);
+    EXPECT_EQ(is_match("aaab", "c*a*b"), true);
+    EXPECT_EQ(is_match("aaabd", "c*a*b"), false);
+    EXPECT_EQ(is_match("daaab", "c*a*b"), false);
+    EXPECT_EQ(is_match("mississippi", "mis*is*p*."), false);
+}
+
+TEST(dp, Q97_interleave_tests)
+{
+    EXPECT_EQ(interleave("ab", "bc", "abbc"), true);
+    EXPECT_EQ(interleave("ab", "bc", "babc"), true);
+    EXPECT_EQ(interleave("ab", "bc", "bacb"), true);
+    EXPECT_EQ(interleave("ab", "bc", "bcab"), true);
+    EXPECT_EQ(interleave("ab", "bc", "cbba"), false);
+}

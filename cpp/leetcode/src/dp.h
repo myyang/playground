@@ -88,4 +88,10 @@ std::vector<int> gray_code(int);
 int min_dest(std::string, std::string);
 int min_dest_rec(std::string, std::string);
 
+// #10
+bool is_match(std::string, std::string);
+
+// #97
+bool interleave(std::string, std::string, std::string);
+
 #endif
