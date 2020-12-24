@@ -551,3 +551,47 @@ std::vector<int> gray_code(int n) {
 
     return res.back();
 }
+
+// #72
+int min_dest(std::string s1, std::string s2) {
+    int l1 = s1.length();
+    int l2 = s2.length();
+    std::vector<std::vector<int>> dp(l1+1, std::vector<int>(l2+1, 0));
+
+    // be careful these ranges
+    for (int i = 0; i <= l1; ++i) dp[i][0] = i;
+    for (int j = 0; j <= l2; ++j) dp[0][j] = j;
+
+    for (int i = 1; i <= l1; ++i)
+    {
+        for (int j = 1; j <= l2; ++j)
+        {
+            int c = (s1[i-1] == s2[j-1]) ? 0 : 1;
+            dp[i][j] = std::min(
+                    dp[i-1][j-1] + c,
+                    std::min(dp[i-1][j], dp[i][j-1]) + 1
+                    );
+        }
+    }
+    return dp[l1][l2];
+}
+
+int min_dest_rec(std::string s1, std::string s2) {
+    int l1 = s1.length();
+    int l2 = s2.length();
+    std::vector<std::vector<int>> dp(l1+1, std::vector<int>(l2+1, 0));
+
+    std::function<int(int i, int j)> rec = [&](int i, int j) {
+        if (i == 0) return j;
+        if (j == 0) return i;
+        if (dp[i][j] > 0) return dp[i][j];
+
+        int c = (s1[i-1] == s2[j-1]) ? 0 : 1;
+        dp[i][j] = std::min(
+                rec(i-1, j-1) + c,
+                std::min(rec(i-1, j), rec(i, j-1)) + 1
+                );
+        return dp[i][j];
+    };
+    return rec(l1, l2);
+}

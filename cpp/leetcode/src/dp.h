@@ -84,4 +84,8 @@ int fill_book_shelves(std::vector<std::vector<int>>&, int);
 // #87
 std::vector<int> gray_code(int);
 
+// #72
+int min_dest(std::string, std::string);
+int min_dest_rec(std::string, std::string);
+
 #endif

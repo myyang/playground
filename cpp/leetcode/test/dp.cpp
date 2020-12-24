@@ -333,3 +333,25 @@ TEST(dp, Q87_gray_code_tests) {
     std::vector<int> ans3 = {0,4,2,6,1,5,3,7};
     EXPECT_EQ(gray_code(3), ans3);
 }
+
+TEST(dp, Q72_min_dest_tests)
+{
+    EXPECT_EQ(min_dest("abcc", "bcd"), 2);
+    EXPECT_EQ(min_dest("abc", "bcd"), 2);
+    EXPECT_EQ(min_dest("", ""), 0);
+    EXPECT_EQ(min_dest("a", "a"), 0);
+    EXPECT_EQ(min_dest("a", "b"), 1);
+    EXPECT_EQ(min_dest("a", ""), 1);
+    EXPECT_EQ(min_dest("", "a"), 1);
+}
+
+TEST(dp, Q72_min_dest_rec_tests)
+{
+    EXPECT_EQ(min_dest_rec("abcc", "bcd"), 2);
+    EXPECT_EQ(min_dest_rec("abc", "bcd"), 2);
+    EXPECT_EQ(min_dest_rec("", ""), 0);
+    EXPECT_EQ(min_dest_rec("a", "a"), 0);
+    EXPECT_EQ(min_dest_rec("a", "b"), 1);
+    EXPECT_EQ(min_dest_rec("a", ""), 1);
+    EXPECT_EQ(min_dest_rec("", "a"), 1);
+}
