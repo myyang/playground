@@ -57,20 +57,9 @@ package:
     - ./py/**
 
 functions:
-  go-hello:
-    handler: bin/hello
-    runtime: go1.x
-    events:
-      - httpApi:
-          path: /go-hello
-          method: get
   go-world:
     handler: bin/world
     runtime: go1.x
-    events:
-      - httpApi:
-          path: /go-world
-          method: get
   js-world:
     handler: js/handler.hello
     runtime: nodejs12.x
