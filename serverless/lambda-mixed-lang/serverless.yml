@@ -53,6 +53,7 @@ package:
     - ./**
   include:
     - ./bin/**
+    - ./js/**
 
 functions:
   go-hello:
@@ -69,6 +70,9 @@ functions:
       - httpApi:
           path: /go-world
           method: get
+  js-world:
+    handler: js/handler.hello
+    runtime: nodejs12.x
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
