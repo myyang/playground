@@ -60,12 +60,28 @@ functions:
   go-world:
     handler: bin/world
     runtime: go1.x
+    events:
+      - http:
+          # test with `curl localhost:4566/restapis/<rest-api-id>/local/_user_request/go-world`
+          path: /go-world
+          method: get
+          integration: lambda
   js-world:
     handler: js/handler.hello
     runtime: nodejs12.x
+    events:
+      - http:
+          path: /js-world
+          method: post
+          integration: lambda
   py-world:
     handler: py.handler.hello
     runtime: python3.8
+    events:
+      - http:
+          path: /py-world
+          method: delete
+          integration: lambda
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
