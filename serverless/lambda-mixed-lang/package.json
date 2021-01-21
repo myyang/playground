@@ -1,0 +1,9 @@
+{
+  "name": "lambda-mixed-lang",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-localstack": "^0.4.28"
+  }
+}
