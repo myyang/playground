@@ -23,6 +23,18 @@ frameworkVersion: '2'
 provider:
   name: aws
   lambdaHashingVersion: 20201221
+  apiGateway:
+    apiKeys:
+      - name: test-api-key
+        value: aabbcc
+    usagePlan:
+        quota:
+          limit: 100
+          offset: 1
+          period: DAY
+        throttle:
+          burstLimit: 3
+          rateLimit: 2
 
 # you can overwrite defaults here
 #  stage: dev
@@ -66,6 +78,8 @@ functions:
           path: /go-world
           method: get
           integration: lambda
+          operationId: GoWorld
+          async: true
   js-world:
     handler: js/handler.hello
     runtime: nodejs12.x
@@ -74,14 +88,22 @@ functions:
           path: /js-world
           method: post
           integration: lambda
+          operationId: JSWorld
+          private: true
   py-world:
     handler: py.handler.hello
     runtime: python3.8
     events:
       - http:
-          path: /py-world
+          path: /py-world/{id}
           method: delete
           integration: lambda
+          operationId: PythonWorld
+          request:
+            parameters:
+              paths:
+                id: true
+
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -137,6 +159,7 @@ functions:
 #       Value: "Some output value"
 
 plugins:
+    #- serverless-plugin-typescript
   - serverless-localstack
 
 custom:

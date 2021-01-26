@@ -32,10 +32,12 @@ deploy: clean build
 
 setup-serverless:
 	$(AT_RUN) $(SERVERLESS) plugin install -n serverless-localstack
+	$(AT_RUN) $(SERVERLESS) plugin install -n serverless-plugin-typescript
 
 setup-localstack:
 	$(AT_DOCKER)if ! $(DOCKER) ps | $(GREP) aws.$(USER); then \
 		$(DOCKER) run --name aws.$(USER) \
+			-p 45566:4566 \
 			-p 4566:4566 \
 			-p 8080:8080 \
 			-v /var/run/docker.sock:/var/run/docker.sock \
