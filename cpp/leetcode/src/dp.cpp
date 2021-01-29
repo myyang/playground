@@ -664,3 +664,41 @@ int longest_common_sub_seq(std::string s1, std::string s2) {
 
     return dp[m][n];
 }
+
+// #1143
+int longest_common_sub_seq_v2(std::string s1, std::string s2) {
+    //int m = s1.length(), n = s2.length();
+    //std::vector<int> dp1 (n+1);
+    //std::vector<int> dp2 (n+1);
+
+    //for (int i = 0; i < m; ++i)
+    //{
+    //    for (int j = 0; j < n; ++j)
+    //    {
+    //        if (s1[i] == s2[j])
+    //        {
+    //            dp2[j+1] = dp1[j] + 1;
+    //        }
+    //        else
+    //        {
+    //            dp2[j+1] = std::max(dp1[j+1], dp2[j]);
+    //        }
+    //        swap(dp1, dp2);  // be careful swapping timing
+    //    }
+    //}
+
+    //return dp1[n];
+    int m = s1.length();
+    int n = s2.length();
+    std::vector<int> dp1(n + 1);
+    std::vector<int> dp2(n + 1);
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j)
+            if (s1[i] == s2[j])
+                dp2[j + 1] = dp1[j] + 1;
+            else
+                dp2[j + 1] = std::max(dp1[j + 1], dp2[j]);
+        swap(dp1, dp2);
+    }
+    return dp1[n];
+}

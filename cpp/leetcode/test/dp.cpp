@@ -383,3 +383,13 @@ TEST(dp, Q1143_longest_common_sub_seq_tests)
     EXPECT_EQ(longest_common_sub_seq("abc", "def"), 0);
     EXPECT_EQ(longest_common_sub_seq("bdaccqwer", "bacqe"), 5);
 }
+
+TEST(dp, Q1143_longest_common_sub_seq_v2_tests)
+{
+    EXPECT_EQ(longest_common_sub_seq_v2("", ""), 0);
+    EXPECT_EQ(longest_common_sub_seq_v2("", "bacqe"), 0);
+    EXPECT_EQ(longest_common_sub_seq_v2("ba", ""), 0);
+    EXPECT_EQ(longest_common_sub_seq_v2("abcc", "aabc"), 3);
+    EXPECT_EQ(longest_common_sub_seq_v2("abc", "def"), 0);
+    EXPECT_EQ(longest_common_sub_seq_v2("bdaccqwer", "bacqe"), 5);
+}

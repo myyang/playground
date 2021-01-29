@@ -96,5 +96,6 @@ bool interleave(std::string, std::string, std::string);
 
 // #1143
 int longest_common_sub_seq(std::string s1, std::string s2);
+int longest_common_sub_seq_v2(std::string s1, std::string s2);
 
 #endif
