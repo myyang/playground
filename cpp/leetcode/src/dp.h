@@ -94,4 +94,7 @@ bool is_match(std::string, std::string);
 // #97
 bool interleave(std::string, std::string, std::string);
 
+// #1143
+int longest_common_sub_seq(std::string s1, std::string s2);
+
 #endif

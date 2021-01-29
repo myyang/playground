@@ -373,3 +373,13 @@ TEST(dp, Q97_interleave_tests)
     EXPECT_EQ(interleave("ab", "bc", "bcab"), true);
     EXPECT_EQ(interleave("ab", "bc", "cbba"), false);
 }
+
+TEST(dp, Q1143_longest_common_sub_seq_tests)
+{
+    EXPECT_EQ(longest_common_sub_seq("", ""), 0);
+    EXPECT_EQ(longest_common_sub_seq("", "bacqe"), 0);
+    EXPECT_EQ(longest_common_sub_seq("ba", ""), 0);
+    EXPECT_EQ(longest_common_sub_seq("abcc", "aabc"), 3);
+    EXPECT_EQ(longest_common_sub_seq("abc", "def"), 0);
+    EXPECT_EQ(longest_common_sub_seq("bdaccqwer", "bacqe"), 5);
+}

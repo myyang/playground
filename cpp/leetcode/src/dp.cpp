@@ -648,3 +648,19 @@ bool interleave(std::string s1, std::string s2, std::string s3) {
 
     return dp[l1][l2];
 }
+
+// #1143
+int longest_common_sub_seq(std::string s1, std::string s2) {
+    int m = s1.length(), n = s2.length();
+    std::vector<std::vector<int>> dp (m+1, std::vector<int>(n + 1));
+
+    for (int i = 0; i < m; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            dp[i+1][j+1] = (s1[i] == s2[j]) ? dp[i][j] + 1 : std::max(dp[i+1][j], dp[i][j+1]);
+        }
+    }
+
+    return dp[m][n];
+}
