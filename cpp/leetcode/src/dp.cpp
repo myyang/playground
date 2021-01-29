@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <deque>
 
 #include "dp.h"
 #include "utils.h"
@@ -701,4 +702,28 @@ int longest_common_sub_seq_v2(std::string s1, std::string s2) {
         swap(dp1, dp2);
     }
     return dp1[n];
+}
+
+// #1092
+std::string shortest_common_sequence(std::string str1, std::string str2) {
+    int m = str1.length(), n = str2.length();
+    std::vector<std::vector<int>> dp (m+1, std::vector<int>(n+1));
+    for (int i = 0; i < m; ++i)
+        for (int j = 0; j < n; ++j)
+            dp[i+1][j+1] = (str1[i] == str2[j]) ? dp[i][j] + 1 : std::max(dp[i][j+1], dp[i+1][j]);
+
+    std::deque<char> q;
+    while (m || n)
+    {
+        char c;
+        if (m == 0) c = str2[--n];
+        else if (n == 0) c = str1[--m];
+        else if (str1[m-1] == str2[n-1]) c = str1[--m] = str2[--n];
+        else if (dp[m-1][n] == dp[m][n]) c = str1[--m];
+        else if (dp[m][n-1] == dp[m][n]) c = str2[--n];
+        //q.push_back(c); reversely push
+        q.push_front(c);
+    }
+
+    return {std::begin(q), std::end(q)};
 }

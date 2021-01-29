@@ -393,3 +393,12 @@ TEST(dp, Q1143_longest_common_sub_seq_v2_tests)
     EXPECT_EQ(longest_common_sub_seq_v2("abc", "def"), 0);
     EXPECT_EQ(longest_common_sub_seq_v2("bdaccqwer", "bacqe"), 5);
 }
+
+TEST(dp, Q1092_shortest_common_sequence_tests)
+{
+    EXPECT_EQ(shortest_common_sequence("", ""), "");
+    EXPECT_EQ(shortest_common_sequence("a", "b"), "ba");
+    EXPECT_EQ(shortest_common_sequence("ab", "b"), "ab");
+    EXPECT_EQ(shortest_common_sequence("ab", "ba"), "bab");
+    EXPECT_EQ(shortest_common_sequence("abb", "baa"), "baabb");
+}

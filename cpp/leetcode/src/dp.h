@@ -98,4 +98,7 @@ bool interleave(std::string, std::string, std::string);
 int longest_common_sub_seq(std::string s1, std::string s2);
 int longest_common_sub_seq_v2(std::string s1, std::string s2);
 
+// #1092
+std::string shortest_common_sequence(std::string s1, std::string s2);
+
 #endif
