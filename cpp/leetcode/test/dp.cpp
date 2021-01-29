@@ -402,3 +402,41 @@ TEST(dp, Q1092_shortest_common_sequence_tests)
     EXPECT_EQ(shortest_common_sequence("ab", "ba"), "bab");
     EXPECT_EQ(shortest_common_sequence("abb", "baa"), "baabb");
 }
+
+TEST(dp, Q718_find_length_tests)
+{
+
+    std::vector<int> a11 = {1,2,3,4,5}, a12 = {7,9,1,2,3};
+    EXPECT_EQ(find_length(a11, a12), 3);
+
+    std::vector<int> a21 = {}, a22 = {7,9,1,2,3};
+    EXPECT_EQ(find_length(a21, a22), 0);
+
+    std::vector<int> a31 = {}, a32 = {};
+    EXPECT_EQ(find_length(a31, a32), 0);
+
+    std::vector<int> a41 = {2,6,8,4,5}, a42 = {7,9,1,2,3};
+    EXPECT_EQ(find_length(a41, a42), 1);
+
+    std::vector<int> a51 = {6,8,4,5}, a52 = {7,9,1,2,3};
+    EXPECT_EQ(find_length(a51, a52), 0);
+}
+
+TEST(dp, Q718_find_length_v2_tests)
+{
+
+    std::vector<int> a11 = {1,2,3,4,5}, a12 = {7,9,1,2,3};
+    EXPECT_EQ(find_length_v2(a11, a12), 3);
+
+    std::vector<int> a21 = {}, a22 = {7,9,1,2,3};
+    EXPECT_EQ(find_length_v2(a21, a22), 0);
+
+    std::vector<int> a31 = {}, a32 = {};
+    EXPECT_EQ(find_length_v2(a31, a32), 0);
+
+    std::vector<int> a41 = {2,6,8,4,5}, a42 = {7,9,1,2,3};
+    EXPECT_EQ(find_length_v2(a41, a42), 1);
+
+    std::vector<int> a51 = {6,8,4,5}, a52 = {7,9,1,2,3};
+    EXPECT_EQ(find_length_v2(a51, a52), 0);
+}

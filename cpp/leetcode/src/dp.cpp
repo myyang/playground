@@ -727,3 +727,66 @@ std::string shortest_common_sequence(std::string str1, std::string str2) {
 
     return {std::begin(q), std::end(q)};
 }
+
+// #718
+int find_length(std::vector<int> A, std::vector<int> B) {
+    int m = A.size(), n = B.size();
+
+    std::vector<std::vector<int>> dp (m+1, std::vector<int>(n+1));
+
+    int ans = 0;
+    for (int i = 0; i < m; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            if (A[i] == B[j])
+            {
+                dp[i+1][j+1] = dp[i][j] + 1;
+                ans = std::max(dp[i+1][j+1], ans);
+            }
+        }
+    }
+
+    return ans;
+}
+
+/*
+ *  1 2 3,   1 2
+ *
+ *  dp     m, n
+ *  0 0 0  1  2
+ *  0 1 0  1  1
+ *  0 1 0  2  2
+ *  0 1 2  2  1
+ *  0 1 2  3  2
+ *  0 1 2  3  1
+ *
+ *  3 1 2,   1 2
+ *
+ *  dp     m, n
+ *  0 0 0  1  2
+ *  0 0 0  1  1
+ *  0 0 0  2  2
+ *  0 1 0  2  1
+ *  0 1 2  3  2
+ *  0 0 2  3  1
+ *  */
+// #718
+int find_length_v2(std::vector<int> A, std::vector<int> B) {
+    if (A.size() < B.size()) std::swap(A, B);
+    int m = A.size(), n = B.size();
+
+    std::vector<int> dp (n+1);
+
+    int ans = 0;
+    for (int i = 1; i <= m; ++i)
+    {
+        for (int j = n; j >= 1; --j)
+        {
+            dp[j] = A[i-1] == B[j-1] ? dp[j-1] + 1 : 0;
+            ans = std::max(ans, dp[j]);
+        }
+    }
+
+    return ans;
+}

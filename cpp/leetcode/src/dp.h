@@ -101,4 +101,8 @@ int longest_common_sub_seq_v2(std::string s1, std::string s2);
 // #1092
 std::string shortest_common_sequence(std::string s1, std::string s2);
 
+// #718
+int find_length(std::vector<int> A, std::vector<int> B);
+int find_length_v2(std::vector<int> A, std::vector<int> B);
+
 #endif
