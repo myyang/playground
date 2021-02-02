@@ -24,7 +24,8 @@ type Response events.APIGatewayProxyResponse
 const dbTSKey = "request_ts"
 
 // Handler is our lambda handler invoked by the `lambda.Start` function call
-func Handler(ctx context.Context, e events.APIGatewayCustomAuthorizerRequestTypeRequest) (Response, error) {
+//func Handler(ctx context.Context, e events.APIGatewayCustomAuthorizerRequestTypeRequest) (Response, error) {
+func Handler(ctx context.Context, e events.APIGatewayProxyRequest) (Response, error) {
 	ts := time.Now().Format(time.RFC3339)
 
 	lambdaCtx, ok := lambdacontext.FromContext(ctx)
@@ -48,7 +49,7 @@ func Handler(ctx context.Context, e events.APIGatewayCustomAuthorizerRequestType
 	}
 
 	body, err := json.Marshal(map[string]interface{}{
-		"message": "Go Serverless v1.1! Your function executed successfully!",
+		"message": "Go Serverless v1.3! Your function executed successfully!",
 		"debug": map[string]interface{}{
 			"db_time":      ts,
 			"request_id":   lambdaCtx.AwsRequestID,

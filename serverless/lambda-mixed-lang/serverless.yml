@@ -92,9 +92,12 @@ functions:
       - http:
           # test with `curl localhost:4566/restapis/<rest-api-id>/local/_user_request/go-world`
           path: /go-world
-          method: get
+          method: post
           integration: lambda
           operationId: GoWorld
+          request:
+            schema:
+              application/json: ${file(json_schema/go_world.json)}
   js-world:
     handler: js/handler.hello
     runtime: nodejs12.x
