@@ -70,6 +70,21 @@ package:
     - ./py/**
 
 functions:
+  go-world-by-id:
+    handler: bin/world
+    runtime: go1.x
+    events:
+      - http:
+          # test with `curl localhost:4566/restapis/<rest-api-id>/local/_user_request/go-world`
+          path: /go-world/{id}
+          method: get
+          integration: lambda
+          operationId: GoWorldByID
+          private: true
+          request:
+            parameters:
+              paths:
+                id: true
   go-world:
     handler: bin/world
     runtime: go1.x
@@ -80,7 +95,6 @@ functions:
           method: get
           integration: lambda
           operationId: GoWorld
-          private: true
   js-world:
     handler: js/handler.hello
     runtime: nodejs12.x

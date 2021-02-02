@@ -24,7 +24,7 @@ type Response events.APIGatewayProxyResponse
 const dbTSKey = "request_ts"
 
 // Handler is our lambda handler invoked by the `lambda.Start` function call
-func Handler(ctx context.Context, e events.APIGatewayCustomAuthorizerRequest) (Response, error) {
+func Handler(ctx context.Context, e events.APIGatewayCustomAuthorizerRequestTypeRequest) (Response, error) {
 	ts := time.Now().Format(time.RFC3339)
 
 	lambdaCtx, ok := lambdacontext.FromContext(ctx)
