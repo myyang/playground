@@ -8,6 +8,7 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-lambda-go/lambdacontext"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 
@@ -23,10 +24,18 @@ type Response events.APIGatewayProxyResponse
 const dbTSKey = "request_ts"
 
 // Handler is our lambda handler invoked by the `lambda.Start` function call
-func Handler(ctx context.Context) (Response, error) {
+func Handler(ctx context.Context, e events.APIGatewayCustomAuthorizerRequest) (Response, error) {
+	ts := time.Now().Format(time.RFC3339)
+
+	lambdaCtx, ok := lambdacontext.FromContext(ctx)
+	if !ok {
+		lambdaCtx = &lambdacontext.LambdaContext{
+			AwsRequestID:       "assign-in-handler-" + ts,
+			InvokedFunctionArn: "assign-in-handler-" + ts,
+		}
+	}
 
 	db := lib.NewDynamoDB(lib.NewAWSConfig())
-	ts := time.Now().Format(time.RFC3339)
 
 	_, err := db.PutItem(&dynamodb.PutItemInput{
 		TableName: aws.String("serverless_test_db"),
@@ -40,7 +49,12 @@ func Handler(ctx context.Context) (Response, error) {
 
 	body, err := json.Marshal(map[string]interface{}{
 		"message": "Go Serverless v1.1! Your function executed successfully!",
-		"db_time": ts,
+		"debug": map[string]interface{}{
+			"db_time":      ts,
+			"request_id":   lambdaCtx.AwsRequestID,
+			"function_arn": lambdaCtx.InvokedFunctionArn,
+			"auth_request": e,
+		},
 	})
 	if err != nil {
 		return Response{StatusCode: 500, Body: "marshal json error"}, err
