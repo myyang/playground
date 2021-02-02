@@ -25,16 +25,17 @@ provider:
   lambdaHashingVersion: 20201221
   apiGateway:
     apiKeys:
-      - name: test-api-key
-        value: aabbcc
-    usagePlan:
-        quota:
-          limit: 100
-          offset: 1
-          period: DAY
-        throttle:
-          burstLimit: 3
-          rateLimit: 2
+      - test-api-key-1st
+      - name: second-key
+        value: test-api-key-2nd
+    #usagePlan:
+    #    quota:
+    #      limit: 100
+    #      offset: 1
+    #      period: DAY
+    #    throttle:
+    #      burstLimit: 3
+    #      rateLimit: 2
 
 # you can overwrite defaults here
 #  stage: dev
@@ -79,7 +80,7 @@ functions:
           method: get
           integration: lambda
           operationId: GoWorld
-          async: true
+          private: true
   js-world:
     handler: js/handler.hello
     runtime: nodejs12.x
