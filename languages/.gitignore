@@ -1,0 +1,7 @@
+// default lex and yacc output
+y.tab.c
+y.tab.h
+lex.yy.c
+
+// default cc output
+a.out
