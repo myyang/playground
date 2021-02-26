@@ -1,0 +1,21 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "Go World JSON",
+  "required": ["post_id"],
+  "properties": {
+    "post_id": {
+      "type": "string",
+      "title": "Post ID",
+      "default": "",
+      "pattern": "^[a-zA-Z0-9]+$"
+    },
+    "extra_field": {
+      "type": "string",
+      "title": "Extra field",
+      "default": "",
+      "pattern": "^[a-zA-Z0-9]*$"
+    }
+  }
+}
