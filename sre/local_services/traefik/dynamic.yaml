@@ -1,0 +1,25 @@
+http:
+    middlewares:
+        localhost-go:
+            redirectregex:
+                regex: "^http://localhost/go/(.*)"
+                replacement: "http://go/$${1}"
+    routers:
+        golinks:
+            rule: "Host(`go`)"
+            service: golinks
+        golinks-ngrokio:
+            rule: "HostRegexp(`{subdomain:.+}.ngrok.io`) && (Query(`to=golinks`) || Query(`to=go`))"
+            service: golinks
+        whoami:
+            rule: "Host(`whoami.docker.localhost`)"
+            service: whoami
+    services:
+        golinks:
+            loadBalancer:
+                servers:
+                    - url: "http://golinks:8067"
+        whoami:
+            loadBalancer:
+                servers:
+                    - url: "http://whoami"

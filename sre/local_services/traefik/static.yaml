@@ -1,0 +1,13 @@
+providers:
+    file:
+        watch: true
+        filename: "/traefik/dynamic.yaml"
+
+api:
+    dashboard: true
+    insecure: true
+
+accessLog: {}
+
+#ping:
+#    manualRouting: true
