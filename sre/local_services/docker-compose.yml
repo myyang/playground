@@ -16,15 +16,21 @@ services:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik:/traefik
+    restart: always
+
   # testing services
   whoami:
     # A container that exposes an API to show its IP address
     image: traefik/whoami
+    restart: always
+
   # golinks for local go/xxx
   golinks:
     build: ./golinks
     volumes:
       - ./data/golinks:/var/data
+    restart: always
+
   # copied from https://github.com/localstack/localstack/blob/master/docker-compose.yml
   localstack:
     image: localstack/localstack
@@ -42,3 +48,4 @@ services:
     volumes:
       - "${TMPDIR:-/tmp}/localstack:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
+    restart: always
