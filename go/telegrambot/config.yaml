@@ -1,2 +1,8 @@
 telegram:
   token: "YOUR_TELEGRAM_BOT_TOKEN"
+
+polymarket:
+  base_url: "https://gamma-api.polymarket.com"
+  cache_ttl: 300  # seconds (5 minutes)
+  fetch_limit: 50 # number of markets to fetch
+  web_app_url: "https://polymarket.com" # telegram mini app entry
