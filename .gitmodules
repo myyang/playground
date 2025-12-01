@@ -4,3 +4,9 @@
 [submodule "cpp/leetcode/lib/googletest"]
 	path = cpp/leetcode/lib/googletest
 	url = https://github.com/google/googletest/
+[submodule "contract/future_block/lib/forge-std"]
+	path = contract/future_block/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "contract/future_block/lib/openzeppelin-contracts"]
+	path = contract/future_block/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
