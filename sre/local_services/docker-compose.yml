@@ -56,26 +56,26 @@ services:
   #    - "/var/run/docker.sock:/var/run/docker.sock"
   #  restart: always
 
-  valkey:
-    container_name: valkey
-    image: valkey/valkey:alpine
-    ports:
-      - "6379:6379"
-    restart: always
-    labels:
-     - "traefik.http.routers.valkey.rule=Host(`valkey`)"
+  #valkey:
+  #  container_name: valkey
+  #  image: valkey/valkey:alpine
+  #  ports:
+  #    - "6379:6379"
+  #  restart: always
+  #  labels:
+  #   - "traefik.http.routers.valkey.rule=Host(`valkey`)"
 
   redis:
     container_name: redis
     image: redis:alpine
     ports:
-      - "6380:6379"
+      - "6379:6379"
     restart: always
     labels:
      - "traefik.http.routers.redis.rule=Host(`redis`)"
 
-  mysql8:
-    container_name: mysql8
+  mysql:
+    container_name: mysql
     image: mysql:8
     platform: linux/x86_64
     ports:
@@ -84,7 +84,7 @@ services:
       - MYSQL_ROOT_PASSWORD=1234
     restart: always
     volumes:
-      - ./data/mysql8:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
     labels:
      - "traefik.http.routers.mysql.rule=Host(`mysql`)"
 
@@ -94,7 +94,9 @@ services:
     ports:
       - "5432:5432"
     environment:
+      - POSTGRES_USER=root
       - POSTGRES_PASSWORD=1234
+      - POSTGRES_HOST_AUTH_METHOD=trust
     restart: always
     volumes:
       - ./data/postgres:/var/lib/postgresql/data

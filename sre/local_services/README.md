@@ -5,7 +5,9 @@ setup local used services:
 1. traefik
 2. whoami
 3. golinks
-4. localstack
+4. redis
+5. mysql
+6. postgres
 
 
 ## setup docker containers
