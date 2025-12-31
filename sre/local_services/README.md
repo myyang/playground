@@ -19,6 +19,16 @@ docker-compose up -d
 ## setup services
 
 ### golinks:
+
+#### domain name
 ```
 sudo echo "127.0.0.1 go" >> /etc/hosts
 ```
+
+#### gcp
+
+```
+gcloud auth application-default login
+```
+
+copy json to creds

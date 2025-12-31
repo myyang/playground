@@ -31,7 +31,10 @@ services:
     container_name: golinks
     build: ./golinks
     volumes:
-      - ./data/golinks:/var/data
+      - ./creds/application_default_credentials.json:/app/application_default_credentials.json
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/application_default_credentials.json
+    command: /go/bin/go --backend=firestore --project=golinks-27b48
     restart: always
     labels:
      - "traefik.http.routers.golinks.rule=Host(`go`)"
