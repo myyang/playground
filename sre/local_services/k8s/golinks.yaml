@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golinks
+  labels:
+    app: golinks
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: golinks
+  template:
+    metadata:
+      labels:
+        app: golinks
+    spec:
+      containers:
+      - name: golinks
+        image: golinks:local
+        imagePullPolicy: Never  # Use local image loaded into k3d/kind
+        ports:
+        - containerPort: 8067
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /app/application_default_credentials.json
+        command: ["/go/bin/go", "--backend=firestore", "--project=golinks-27b48"]
+        volumeMounts:
+        - name: google-creds
+          mountPath: /app
+          readOnly: true
+      volumes:
+      - name: google-creds
+        secret:
+          secretName: golinks-creds
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: golinks
+spec:
+  selector:
+    app: golinks
+  ports:
+  - port: 80
+    targetPort: 8067
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: golinks
+spec:
+  rules:
+  - host: go
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: golinks
+            port:
+              number: 80

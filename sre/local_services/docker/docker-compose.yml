@@ -29,9 +29,9 @@ services:
   # golinks for local go/xxx
   golinks:
     container_name: golinks
-    build: ./golinks
+    image: golinks:local
     volumes:
-      - ./creds/application_default_credentials.json:/app/application_default_credentials.json
+      - ../creds/application_default_credentials.json:/app/application_default_credentials.json
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/app/application_default_credentials.json
     command: /go/bin/go --backend=firestore --project=golinks-27b48
