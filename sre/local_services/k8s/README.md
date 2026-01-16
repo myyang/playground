@@ -57,4 +57,7 @@ kubectl port-forward svc/postgres 5432:5432
 
 # Redis
 kubectl port-forward svc/redis 6379:6379
+
+# ClickHouse
+kubectl port-forward svc/clickhouse 8123:8123
 ```

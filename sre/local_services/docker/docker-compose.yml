@@ -105,3 +105,15 @@ services:
       - ./data/postgres:/var/lib/postgresql/data
     labels:
      - "traefik.http.routers.postgres.rule=Host(`postgres`)"
+
+  clickhouse:
+    container_name: clickhouse
+    image: clickhouse/clickhouse-server:latest
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    restart: always
+    volumes:
+      - ./data/clickhouse:/var/lib/clickhouse
+    labels:
+     - "traefik.http.routers.clickhouse.rule=Host(`clickhouse`)"

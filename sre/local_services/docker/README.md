@@ -36,9 +36,10 @@ You should see:
 - `postgres`
 - `mysql`
 - `redis`
+- `clickhouse`
 
 ## Accessing Services
 
 - **Golinks**: `http://go` (Requires `/etc/hosts` entry: `127.0.0.1 go`)
 - **Traefik Dashboard**: `http://localhost:8080` (if enabled in config)
-- **Databases**: Exposed on their standard ports (`3306`, `5432`, `6379`) on localhost.
+- **Databases**: Exposed on their standard ports (`3306`, `5432`, `6379`, `8123`, `9000`) on localhost.
