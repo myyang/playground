@@ -25,16 +25,17 @@ gcloud auth application-default login
 # Ensure the file is saved to ./creds/application_default_credentials.json
 ```
 
-### 2. Build Image
-Build the `golinks` image locally so it can be used by both environments:
+### 2. Build Images
+Build the local images so they can be used by both environments:
 ```bash
 docker build -t golinks:local ./dockerfiles/golinks
+docker build -t openclaw:local ./dockerfiles/openclaw
 ```
 
 ### 3. DNS Setup
-Map the `go` hostname to localhost for easy access:
+Map the hostnames to localhost for easy access:
 ```bash
-sudo echo "127.0.0.1 go" >> /etc/hosts
+sudo echo "127.0.0.1 go openclaw.docker.localhost" >> /etc/hosts
 ```
 
 ## Running the Stack

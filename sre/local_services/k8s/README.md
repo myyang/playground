@@ -5,7 +5,11 @@ This guide explains how to run the local services stack on Kubernetes (specifica
 ## Prerequisites
 1. Install [k3d](https://k3d.io/) (Recommended for local dev) or enable Kubernetes in Docker Desktop.
 2. Ensure `kubectl` is installed and pointing to your cluster.
-3. Ensure you have built the base image: `docker build -t golinks:local ./golinks` (Run from project root).
+3. Ensure you have built the base images (run from project root):
+   ```bash
+   docker build -t golinks:local ./dockerfiles/golinks
+   docker build -t openclaw:local ./dockerfiles/openclaw
+   ```
 
 ## 1. Create Secrets
 We need to load the Google credentials into Kubernetes as a secret.
@@ -23,8 +27,9 @@ Since `golinks` is a local build, we need to load the image into the k3d cluster
 # Create cluster if you haven't already
 # k3d cluster create k3d-cluster -p "80:80@loadbalancer"
 
-# Import image to k3d (replace 'k3d-cluster' with your actual cluster name)
+# Import images to k3d (replace 'k3d-cluster' with your actual cluster name)
 k3d image import golinks:local -c k3d-cluster
+k3d image import openclaw:local -c k3d-cluster
 ```
 *Note: If using Docker Desktop Kubernetes, the image is usually available automatically if built locally.*
 
@@ -34,6 +39,7 @@ Apply the configurations:
 ```bash
 kubectl apply -f k8s/databases.yaml
 kubectl apply -f k8s/golinks.yaml
+kubectl apply -f k8s/openclaw.yaml
 ```
 
 ## 4. Accessing Services
@@ -43,6 +49,17 @@ Add the domain mapping to your `/etc/hosts` if not already present:
 `127.0.0.1 go`
 
 Access via: http://go
+
+### OpenClaw
+Add the domain mapping:
+`127.0.0.1 openclaw.docker.localhost`
+
+Access via: http://openclaw.docker.localhost
+
+Note: For initial setup, you must run the onboarding command inside the pod:
+```bash
+kubectl exec -it deployment/openclaw -- openclaw onboard
+```
 
 ### Databases
 Databases (MySQL, Postgres, Redis) are not exposed via Ingress by default (since they are TCP, not HTTP).
